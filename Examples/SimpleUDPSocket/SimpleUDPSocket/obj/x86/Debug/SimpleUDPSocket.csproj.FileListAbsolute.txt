@@ -1,0 +1,42 @@
+Z:\Seafile\USU\Classes\cs5200f14\Lessons\Lesson02\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe
+Z:\Seafile\USU\Classes\cs5200f14\Lessons\Lesson02\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.pdb
+Z:\Seafile\USU\Classes\cs5200f14\Lessons\Lesson02\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
+Z:\Seafile\USU\Classes\cs5200f14\Lessons\Lesson02\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
+Z:\Seafile\USU\Classes\cs5200f14\Lessons\Lesson02\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe.config
+Z:\Seafile\USU\Classes\cs5200f14\Lessons\Lesson02\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.csprojResolveAssemblyReference.cache
+Y:\Seafile\USU\CS5200 2014 Fall\Notes\IntroToDistributedSystems\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe.config
+Y:\Seafile\USU\CS5200 2014 Fall\Notes\IntroToDistributedSystems\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
+Y:\Seafile\USU\CS5200 2014 Fall\Notes\IntroToDistributedSystems\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
+Y:\Seafile\USU\CS5200 2014 Fall\Notes\IntroToDistributedSystems\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe
+Y:\Seafile\USU\CS5200 2014 Fall\Notes\IntroToDistributedSystems\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.pdb
+Y:\Seafile\USU\CS5200 2014 Fall\Notes\IntroToDistributedSystems\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.csprojResolveAssemblyReference.cache
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe.config
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.pdb
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
+Y:\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe.config
+Y:\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
+Y:\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
+\\Mac\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe.config
+\\Mac\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
+\\Mac\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
+\\Mac\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe
+\\Mac\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.pdb
+Y:\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe.config
+Y:\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
+Y:\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
+Y:\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe
+Y:\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.pdb
+Y:\Box Sync\Classes\cs5200 2015 Fall\Tutorials\SimpleUDPSocket\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.csprojResolveAssemblyReference.cache
+\\psf\Home\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe.config
+\\psf\Home\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
+\\psf\Home\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
+\\psf\Home\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe
+\\psf\Home\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.pdb
+Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe.config
+Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
+Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
+Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe
+Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.pdb
+Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.csprojResolveAssemblyReference.cache
