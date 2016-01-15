@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 using System.Net;
 using System.Net.Sockets;
@@ -9,15 +8,15 @@ namespace SimpleUDPSocket
 {
     public class SimpleSender
     {
-        private static int nextId = 0;
-        private UdpClient myUdpClient;
+        private static int _nextId = 0;
+        private readonly UdpClient _myUdpClient;
 
         public List<IPEndPoint> Peers { get; set; }
 
         public SimpleSender()
         {
-            IPEndPoint localEP = new IPEndPoint(IPAddress.Any, 0);
-            myUdpClient = new UdpClient(localEP);
+            IPEndPoint localEp = new IPEndPoint(IPAddress.Any, 0);
+            _myUdpClient = new UdpClient(localEp);
             Peers = new List<IPEndPoint>();
         }
 
@@ -57,9 +56,8 @@ namespace SimpleUDPSocket
 
         private void AskForMessageAndSend()
         {
-            string message = string.Empty;
             Console.Write("Enter a message to send: ");
-            message = Console.ReadLine();
+            string message = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(message))
                 SendToPeers(message);
         }
@@ -79,7 +77,7 @@ namespace SimpleUDPSocket
 
                 foreach (IPEndPoint ep in Peers)
                 {
-                    int bytesSent = myUdpClient.Send(bytes, bytes.Length, ep);
+                    int bytesSent = _myUdpClient.Send(bytes, bytes.Length, ep);
                     Console.WriteLine("Send to {0} was {1}", ep, (bytesSent == bytes.Length) ? "Successful" : "Not Successful");
                 }
             }
@@ -87,9 +85,9 @@ namespace SimpleUDPSocket
 
         private int GetNextId()
         {
-            if (nextId == Int32.MaxValue)
-                nextId = 0;
-            return nextId++;
+            if (_nextId == Int32.MaxValue)
+                _nextId = 0;
+            return _nextId++;
         }
     }
 }

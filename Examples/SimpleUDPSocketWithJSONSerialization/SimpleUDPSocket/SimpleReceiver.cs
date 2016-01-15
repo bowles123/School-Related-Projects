@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Text;
 
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
-using System.Runtime.CompilerServices;
 
 namespace SimpleUDPSocket
 {

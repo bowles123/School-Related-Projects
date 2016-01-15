@@ -39,3 +39,4 @@ Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocketWithJSONSerialization\S
 Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocketWithJSONSerialization\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
 Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocketWithJSONSerialization\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe
 Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocketWithJSONSerialization\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.pdb
+Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocketWithJSONSerialization\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.csprojResolveAssemblyReference.cache

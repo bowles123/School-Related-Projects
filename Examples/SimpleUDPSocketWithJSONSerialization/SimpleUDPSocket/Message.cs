@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
@@ -11,7 +8,7 @@ namespace SimpleUDPSocket
     [DataContract]
     public class Message
     {
-        private static DataContractJsonSerializer _serializer = new DataContractJsonSerializer(typeof(Message));
+        private static readonly DataContractJsonSerializer Serializer = new DataContractJsonSerializer(typeof(Message));
 
         [DataMember]
         public int Id { get; set; }
@@ -23,11 +20,8 @@ namespace SimpleUDPSocket
         public byte[] Encode()
         {
             MemoryStream mstrem = new MemoryStream();
-            _serializer = new DataContractJsonSerializer(typeof(Message));
-            _serializer.WriteObject(mstrem, this);
-            byte[] bytes = mstrem.ToArray();
-
-            return bytes;
+            Serializer.WriteObject(mstrem, this);
+            return mstrem.ToArray();
         }
 
         public static Message Decode(byte[] bytes)
@@ -36,7 +30,7 @@ namespace SimpleUDPSocket
             if (bytes != null)
             {
                 MemoryStream mstream = new MemoryStream(bytes);
-                message = _serializer.ReadObject(mstream) as Message;
+                message = Serializer.ReadObject(mstream) as Message;
             }
 
             return message;
