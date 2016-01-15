@@ -40,3 +40,8 @@ Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x8
 Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe
 Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.pdb
 Y:\UnderGit\cs5200s16-instructor\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.csprojResolveAssemblyReference.cache
+Y:\UnderGit\cs5200s16-shared\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe.config
+Y:\UnderGit\cs5200s16-shared\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
+Y:\UnderGit\cs5200s16-shared\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
+Y:\UnderGit\cs5200s16-shared\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe
+Y:\UnderGit\cs5200s16-shared\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.pdb

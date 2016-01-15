@@ -46,7 +46,7 @@ namespace SimpleUDPSocket
                 {
                     receiveBuffer = _myUdpClient.Receive(ref remoteEp);
                 }
-                catch (SocketException err)
+                catch (SocketException)
                 {
                     Console.WriteLine("Timeout");
                 }
