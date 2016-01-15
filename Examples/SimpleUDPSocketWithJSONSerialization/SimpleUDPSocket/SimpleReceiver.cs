@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Text;
 
 using System.Net;
 using System.Net.Sockets;
 using System.Net.NetworkInformation;
 
+using log4net;
+
 namespace SimpleUDPSocket
 {
     public class SimpleReceiver
     {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof (SimpleReceiver));
+
         private readonly UdpClient _myUdpClient;
 
         public SimpleReceiver()
@@ -61,7 +66,11 @@ namespace SimpleUDPSocket
 
             if (bytes != null)
             {
+                Logger.DebugFormat("Received {0}", Encoding.ASCII.GetString(bytes));
+
                 Message message = Message.Decode(bytes);
+                
+
                 if (message != null)
                 {
                     Console.WriteLine(string.Format("Message {0} send at {1} from {2} --> {3}",

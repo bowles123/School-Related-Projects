@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 
+using log4net;
+
 namespace SimpleUDPSocket
 {
     public class SimpleSender
     {
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(SimpleReceiver));
+
         private static int _nextId = 0;
         private readonly UdpClient _myUdpClient;
 
@@ -49,8 +53,11 @@ namespace SimpleUDPSocket
             if (!string.IsNullOrWhiteSpace(peer))
             {
                 IPEndPoint peerAddress = EndPointParser.Parse(peer);
-                if (peerAddress!=null)
+                if (peerAddress != null)
+                {
                     Peers.Add(peerAddress);
+                    Logger.DebugFormat("Add {0} as a peer", peerAddress);
+                }
             }
         }
 
@@ -78,7 +85,7 @@ namespace SimpleUDPSocket
                 foreach (IPEndPoint ep in Peers)
                 {
                     int bytesSent = _myUdpClient.Send(bytes, bytes.Length, ep);
-                    Console.WriteLine("Send to {0} was {1}", ep, (bytesSent == bytes.Length) ? "Successful" : "Not Successful");
+                    Logger.InfoFormat("Send to {0} was {1}", ep, (bytesSent == bytes.Length) ? "Successful" : "Not Successful");
                 }
             }
         }
