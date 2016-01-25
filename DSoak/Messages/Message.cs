@@ -36,7 +36,8 @@ namespace Messages
             typeof(RegisterGameRequest),
             typeof(Reply),
             typeof(Request),
-            typeof(ValidateProcessRequest)
+            typeof(ValidateProcessRequest),
+            typeof(ValidateProcessReply)
         };
 
         public Message()
