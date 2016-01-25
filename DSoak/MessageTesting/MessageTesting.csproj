@@ -50,6 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ReplyTesters\RegisterGameReplyTester.cs" />
+    <Compile Include="ReplyTesters\NextIdReplyTester.cs" />
     <Compile Include="ReplyTesters\JoinGameReplyTester.cs" />
     <Compile Include="RequestTesters\JoinGameRequestTester.cs" />
     <Compile Include="RequestTesters\LoginRequestTester.cs" />
