@@ -1,10 +1,4 @@
-﻿using System;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-using Messages;
-using Messages.ReplyMessages;
-using SharedObjects;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace MessageTesting.ReplyTesters
 {
