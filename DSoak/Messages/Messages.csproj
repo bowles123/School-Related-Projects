@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="ReplyMessages\NextIdReply.cs" />
     <Compile Include="ReplyMessages\RegisterGameReply.cs" />
+    <Compile Include="ReplyMessages\ValidateProcessReply.cs" />
     <Compile Include="RequestMessages\AliveRequest.cs" />
     <Compile Include="RequestMessages\NextIdRequest.cs" />
     <Compile Include="ReplyMessages\JoinGameReply.cs" />
