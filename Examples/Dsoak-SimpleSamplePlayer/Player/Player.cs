@@ -65,7 +65,7 @@ namespace Player
         {
             Logger.Debug("Initialize");
 
-            myClient = new UdpClient();
+            myClient = new UdpClient(0);
 
             myIdentity = new IdentityInfo()
             {
