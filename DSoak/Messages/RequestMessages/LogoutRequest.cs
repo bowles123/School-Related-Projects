@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-using SharedObjects;
+﻿using System.Runtime.Serialization;
 
 namespace Messages.RequestMessages
 {

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Runtime.Serialization;
-
+﻿using System.Runtime.Serialization;
 using SharedObjects;
 
 namespace Messages.RequestMessages
@@ -10,8 +8,10 @@ namespace Messages.RequestMessages
     {
         [DataMember]
         public ProcessInfo.ProcessType ProcessType { get; set; }
+
         [DataMember]
         public string ProcessLabel { get; set; }
+
         [DataMember]
         public IdentityInfo Identity { get; set; }
     }

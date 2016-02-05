@@ -40,12 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Balloon.cs" />
     <Compile Include="GameInfo.cs" />
     <Compile Include="IdentityInfo.cs" />
+    <Compile Include="MessageNumber.cs" />
+    <Compile Include="Penny.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicEndPoint.cs" />
     <Compile Include="ProcessInfo.cs" />
-    <Compile Include="PublicKey.cs" />
+    <Compile Include="SharedResource.cs" />
+    <Compile Include="Umbrella.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

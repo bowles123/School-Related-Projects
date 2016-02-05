@@ -1,11 +1,12 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using Messages;
 using Messages.ReplyMessages;
 using SharedObjects;
 
-namespace MessageTesting.ReplyTesters
+namespace MessageTesting
 {
     [TestClass]
     public class GameListReplyTester

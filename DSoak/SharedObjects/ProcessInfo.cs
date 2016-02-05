@@ -43,7 +43,6 @@ namespace SharedObjects
             }
         }
         public string StatusString { get { return statusNames[(int) Status]; } }
-
         [DataMember]
         public int Wins { get; set; }
         [DataMember]
@@ -64,8 +63,9 @@ namespace SharedObjects
         public short NumberOfUnraisedUmbrellas { get; set; }
         [DataMember]
         public bool HasUmbrellaRaised { get; set; }
+
         [DataMember]
-        public PublicKey PublicKey { get; set; }
+        public byte[] DigitalSignature { get; set; }
 
         public DateTime? AliveTimestamp { get; set; }
         public Int32 AliveReties { get; set; }

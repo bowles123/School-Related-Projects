@@ -1,6 +1,10 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using System.Text;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace MessageTesting.ReplyTesters
+using Messages;
+
+namespace MessageTesting
 {
     [TestClass]
     public class JoinGameReplyTester

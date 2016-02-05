@@ -50,16 +50,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ReplyTesters\RegisterGameReplyTester.cs" />
-    <Compile Include="ReplyTesters\NextIdReplyTester.cs" />
-    <Compile Include="ReplyTesters\JoinGameReplyTester.cs" />
-    <Compile Include="RequestTesters\JoinGameRequestTester.cs" />
-    <Compile Include="RequestTesters\LoginRequestTester.cs" />
+    <Compile Include="JoinGameReplyTester.cs" />
+    <Compile Include="JoinGameRequestTester.cs" />
+    <Compile Include="LoginRequestTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestTesters\AliveRequestTester.cs" />
-    <Compile Include="ReplyTesters\GameListReplyTester.cs" />
-    <Compile Include="RequestTesters\GameListRequestTester.cs" />
-    <Compile Include="ReplyTesters\LoginReplyTester.cs" />
+    <Compile Include="AliveRequestTester.cs" />
+    <Compile Include="GameListReplyTester.cs" />
+    <Compile Include="GameListRequestTester.cs" />
+    <Compile Include="LoginReplyTester.cs" />
     <Compile Include="ReplyTester.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SharedObjects;
 
+
 namespace SharedObjectTesting
 {
     [TestClass]
@@ -18,6 +19,9 @@ namespace SharedObjectTesting
             Assert.AreEqual(2, g1.MinPlayers);
             Assert.AreEqual(20, g1.MaxPlayers);
             Assert.IsNull(g1.GameManager);
+            Assert.AreEqual(0, g1.StartingNumberOfPlayers);
+            Assert.IsNotNull(g1.CurrentProcesses);
+            Assert.AreEqual(0, g1.CurrentProcesses.Length);
             Assert.AreEqual(0, g1.Winner);
 
             PublicEndPoint ep1 = new PublicEndPoint() { Host = "buzz.serv.usu.edu", Port = 20011 };
@@ -61,6 +65,8 @@ namespace SharedObjectTesting
                                 MaxPlayers = 5,
                                 Status = GameInfo.StatusCode.NotInitialized,
                                 GameManager = gm1,
+                                StartingNumberOfPlayers = 3,
+                                CurrentProcesses = new ProcessInfo[] { player1, player2 },
                                 Winner = player1.ProcessId
                             };
 
@@ -70,6 +76,10 @@ namespace SharedObjectTesting
             Assert.AreEqual(5, g2.MaxPlayers);
             Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g2.Status);
             Assert.AreSame(gm1, g2.GameManager);
+            Assert.AreEqual(3, g2.StartingNumberOfPlayers);
+            Assert.AreEqual(2, g2.CurrentProcesses.Length);
+            Assert.AreSame(player1, g2.CurrentProcesses[0]);
+            Assert.AreSame(player2, g2.CurrentProcesses[1]);
             Assert.AreEqual(player1.ProcessId, g2.Winner);
 
             GameInfo g3 = g2.Clone();
@@ -82,21 +92,28 @@ namespace SharedObjectTesting
             Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g3.Status);
             Assert.AreEqual(2, g3.GameManager.ProcessId);
             Assert.AreEqual(ep1, g3.GameManager.EndPoint);
+            Assert.AreEqual(2, g2.CurrentProcesses.Length);
+            Assert.AreEqual(player1.ProcessId, g2.CurrentProcesses[0].ProcessId);
+            Assert.AreEqual(player2.ProcessId, g2.CurrentProcesses[1].ProcessId);
             Assert.AreEqual(player1.ProcessId, g2.Winner);
 
             ProcessInfo p20 = new ProcessInfo() { ProcessId = 20, Label = "Test Process #20" };
             g3.AddCurrentProcess(p20);
+            Assert.AreEqual(3, g3.CurrentProcesses.Length);
             Assert.AreSame(p20, g3.FindCurrentProcess(20));
 
             ProcessInfo p21 = new ProcessInfo() { ProcessId = 21, Label = "Test Process #21" };
             g3.AddCurrentProcess(p21);
+            Assert.AreEqual(4, g3.CurrentProcesses.Length);
             Assert.AreSame(p21, g3.FindCurrentProcess(21));
 
             ProcessInfo p22 = new ProcessInfo() { ProcessId = 22, Label = "Test Process #22" };
             g3.AddCurrentProcess(p22);
+            Assert.AreEqual(5, g3.CurrentProcesses.Length);
             Assert.AreSame(p22, g3.FindCurrentProcess(22));
 
             g3.RemoveCurrentProcess(21);
+            Assert.AreEqual(4, g3.CurrentProcesses.Length);
             Assert.IsNull(g3.FindCurrentProcess(21));
         }
 

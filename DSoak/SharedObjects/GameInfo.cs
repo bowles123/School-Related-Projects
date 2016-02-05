@@ -27,6 +27,39 @@ namespace SharedObjects
         public Int32 MinPlayers { get; set; }
         [DataMember]
         public Int32 MaxPlayers { get; set; }
+        [DataMember]
+        public Int32 StartingNumberOfPlayers { get; set; }
+
+        public ProcessInfo[] CurrentProcesses
+        {
+            get
+            {
+                if (currentProcesses == null)
+                    currentProcesses = new List<ProcessInfo>();
+                if (myLock == null)
+                    myLock = new object();
+
+                ProcessInfo[] result = null;
+                lock (myLock)
+                {
+                    result = currentProcesses.ToArray();
+                }
+                return result;
+            }
+            set
+            {
+                if (myLock == null)
+                    myLock = new object();
+
+                lock (myLock)
+                {
+                    if (value == null)
+                        currentProcesses = new List<ProcessInfo>();
+                    else
+                        currentProcesses = value.ToList();
+                }
+            }
+        }
 
         [DataMember]
         public Int32 Winner { get; set; }

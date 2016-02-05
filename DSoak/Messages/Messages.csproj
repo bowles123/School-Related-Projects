@@ -43,11 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ReplyMessages\NextIdReply.cs" />
-    <Compile Include="ReplyMessages\RegisterGameReply.cs" />
-    <Compile Include="ReplyMessages\ValidateProcessReply.cs" />
     <Compile Include="RequestMessages\AliveRequest.cs" />
-    <Compile Include="RequestMessages\NextIdRequest.cs" />
     <Compile Include="ReplyMessages\JoinGameReply.cs" />
     <Compile Include="ReplyMessages\GameListReply.cs" />
     <Compile Include="RequestMessages\GameListRequest.cs" />
@@ -57,19 +53,8 @@
     <Compile Include="RequestMessages\LogoutRequest.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RequestMessages\RegisterGameRequest.cs" />
     <Compile Include="ReplyMessages\Reply.cs" />
     <Compile Include="RequestMessages\Request.cs" />
-    <Compile Include="RequestMessages\ValidateProcessRequest.cs" />
-    <Compile Include="StatusMessages\EndGame.cs" />
-    <Compile Include="StatusMessages\ReadyToStart.cs" />
-    <Compile Include="StatusMessages\StatusMessage.cs" />
-    <Compile Include="StreamMessages\InGame.cs" />
-    <Compile Include="StreamMessages\KeyInfo.cs" />
-    <Compile Include="StreamMessages\NotInGame.cs" />
-    <Compile Include="StreamMessages\ResendRequest.cs" />
-    <Compile Include="StreamMessages\StartGame.cs" />
-    <Compile Include="StreamMessages\StreamMessage.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharedObjects\SharedObjects.csproj">

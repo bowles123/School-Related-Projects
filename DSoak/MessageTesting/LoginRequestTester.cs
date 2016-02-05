@@ -15,7 +15,11 @@ namespace MessageTesting
         [TestMethod]
         public void LoginRequest_TestEverything()
         {
+            MessageNumber.LocalProcessId = 10;
+
             LoginRequest r1 = new LoginRequest();
+            Assert.IsNull(r1.MsgId);
+            Assert.IsNull(r1.ConvId);
             Assert.IsNull(r1.Identity);
 
             IdentityInfo i1 = new IdentityInfo()
@@ -26,12 +30,19 @@ namespace MessageTesting
                                     Alias = "Tommy"
                                 };
 
+            MessageNumber msgNr = MessageNumber.Create();
             LoginRequest r2 = new LoginRequest()
                                 {
+                                    MsgId = msgNr,
+                                    ConvId = msgNr.Clone(),
                                     ProcessType = ProcessInfo.ProcessType.Player,
                                     ProcessLabel = "Test Player",
                                     Identity = i1
                                 };
+            Assert.AreSame(msgNr, r2.MsgId);
+            Assert.AreNotSame(msgNr, r2.ConvId);
+            Assert.AreEqual(msgNr.Pid, r2.MsgId.Pid);
+            Assert.AreEqual(msgNr.Seq, r2.MsgId.Seq);
             Assert.AreEqual(ProcessInfo.ProcessType.Player, r2.ProcessType);
             Assert.AreEqual("Test Player", r2.ProcessLabel);
             Assert.IsNotNull(r2.Identity);
@@ -44,6 +55,10 @@ namespace MessageTesting
 
             Message m2 = Message.Decode(bytes);
             LoginRequest r3 = m2 as LoginRequest;
+            Assert.AreEqual(msgNr.Pid, r2.MsgId.Pid);
+            Assert.AreEqual(msgNr.Seq, r2.MsgId.Seq);
+            Assert.AreEqual(msgNr.Pid, r2.ConvId.Pid);
+            Assert.AreEqual(msgNr.Seq, r2.ConvId.Seq);
             Assert.AreEqual(r3.ProcessType, r2.ProcessType);
             Assert.AreEqual(r2.ProcessLabel, r3.ProcessLabel);
             Assert.IsNotNull(r3.Identity);

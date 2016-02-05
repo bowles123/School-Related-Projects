@@ -4,7 +4,7 @@ using Messages;
 using Messages.ReplyMessages;
 using SharedObjects;
 
-namespace MessageTesting.ReplyTesters
+namespace MessageTesting
 {
     [TestClass]
     public class LoginReplyTester
