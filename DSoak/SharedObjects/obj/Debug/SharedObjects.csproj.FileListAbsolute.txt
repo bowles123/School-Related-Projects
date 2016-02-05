@@ -9,6 +9,5 @@ Y:\UnderGit\cs5200s16-instructor\DSoak\SharedObjects\obj\Debug\SharedObjects.pdb
 \\psf\Home\UnderGit\cs5200s16-instructor\DSoak\SharedObjects\obj\Debug\SharedObjects.pdb
 Y:\UnderGit\cs5200s16-shared\DSoak\SharedObjects\bin\Debug\SharedObjects.dll
 Y:\UnderGit\cs5200s16-shared\DSoak\SharedObjects\bin\Debug\SharedObjects.pdb
-Y:\UnderGit\cs5200s16-shared\DSoak\SharedObjects\obj\Debug\SharedObjects.csprojResolveAssemblyReference.cache
 Y:\UnderGit\cs5200s16-shared\DSoak\SharedObjects\obj\Debug\SharedObjects.dll
 Y:\UnderGit\cs5200s16-shared\DSoak\SharedObjects\obj\Debug\SharedObjects.pdb

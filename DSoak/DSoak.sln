@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedObjectsTesting", "Sha
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageTesting", "MessageTesting\MessageTesting.csproj", "{9EB3C853-472E-48D9-BCEE-E23F95629D87}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{3239FCCA-21EB-4B04-B8AD-C442491E463E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{9EB3C853-472E-48D9-BCEE-E23F95629D87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EB3C853-472E-48D9-BCEE-E23F95629D87}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EB3C853-472E-48D9-BCEE-E23F95629D87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3239FCCA-21EB-4B04-B8AD-C442491E463E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3239FCCA-21EB-4B04-B8AD-C442491E463E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3239FCCA-21EB-4B04-B8AD-C442491E463E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3239FCCA-21EB-4B04-B8AD-C442491E463E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
