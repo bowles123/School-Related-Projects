@@ -22,31 +22,41 @@ namespace TcpResponder
                 TcpClient client = server.AcceptTcpClient();
                 NetworkStream stream = client.GetStream();
 
-                byte[] buffer = new byte[256];
-                bool stayConnected = true;
-                while (stayConnected)
-                {
-                    try
-                    {
-                        int bytesRead = stream.Read(buffer, 0, buffer.Length);
-                        if (bytesRead > 0)
-                        {
-                            string data = System.Text.Encoding.ASCII.GetString(buffer);
-                            Console.WriteLine("Received {0} bytes: {1}", bytesRead, data);
-                            if (data == "$" || data == "*")
-                                stayConnected = false;
-
-                            if (data == "$")
-                                keepGoing = false;
-                        }
-                    }
-                    catch
-                    {
-                        stayConnected = false;
-                    }
-                }
+                keepGoing = ReceiveDataFromClient(stream);
             }
 
+        }
+
+        private static bool ReceiveDataFromClient(NetworkStream stream)
+        {
+            byte[] buffer = new byte[256];
+
+            bool keepGoing = true;
+            bool stayConnected = true;
+
+            while (stayConnected)
+            {
+                try
+                {
+                    int bytesRead = stream.Read(buffer, 0, buffer.Length);
+                    if (bytesRead > 0)
+                    {
+                        string data = System.Text.Encoding.ASCII.GetString(buffer, 0, bytesRead);
+                        Console.WriteLine("Received {0} bytes: {1}", bytesRead, data);
+
+                        if (data == "$" || data == "*")
+                            stayConnected = false;
+
+                        if (data == "$")
+                            keepGoing = false;
+                    }
+                }
+                catch
+                {
+                    stayConnected = false;
+                }
+            }
+            return keepGoing;
         }
     }
 }
