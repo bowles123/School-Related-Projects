@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Configuration;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Utils
 {
@@ -11,28 +7,6 @@ namespace Utils
 
     public static class HelperFunctions
     {
-        public static Random randomGenerator = new Random();
-        public static object randomLock = new object();
-
-        public static Int32 NextRandom(Int32 min, Int32 max)
-        {
-            return randomGenerator.Next(min, max);
-        }
-
-        public static double RandomDouble(double min, double max, int percision)
-        {
-            double p = Math.Pow(10, percision);
-            Int32 minInt = Convert.ToInt32(min * p);
-            Int32 maxInt = Convert.ToInt32(max * p) + 1;
-            return randomGenerator.Next(minInt, maxInt) / p;
-        }
-
-        public static bool RandomBool(double probablyForTrue)
-        {
-            double tmp = randomGenerator.NextDouble();
-            return (tmp < probablyForTrue);
-        }
-
         public static string ComputeNthLabel(Int32 n)
         {
             string prefix = (n < 0) ? "-" : string.Empty;
@@ -53,13 +27,7 @@ namespace Utils
         public static string ByteToStringDisplay(byte[] data)
         {
             string result = string.Empty;
-            if (data == null)
-                result = "null";
-            else
-            {
-                foreach (byte b in data)
-                    result += string.Format(" {0,3}", b.ToString("D3"));
-            }
+            result = (data == null) ? "null" : data.Aggregate(result, (current, b) => current + string.Format(" {0,3}", b.ToString("D3")));
             return result;
         }
     }

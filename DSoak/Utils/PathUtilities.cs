@@ -20,8 +20,6 @@ namespace Utils
             {
                 if (Assembly.GetEntryAssembly() != null)
                     return Assembly.GetEntryAssembly().Location;
-                else if (Assembly.GetExecutingAssembly() != null)
-                    return Assembly.GetExecutingAssembly().Location;
                 else
                     return string.Empty;
             }
@@ -46,7 +44,7 @@ namespace Utils
                 AssemblyInformationalVersionAttribute[] attribs =
                     (AssemblyInformationalVersionAttribute[])
                     assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), false);
-                if ((attribs != null) && (attribs.Length > 0))
+                if (attribs.Length > 0)
                     return attribs[0].InformationalVersion.Trim();
 
                 throw new ApplicationException("Assembly doesn't have informational version.");
@@ -203,7 +201,7 @@ namespace Utils
         /// Dictionary used so that path formatters can get
         /// the correct filenames when loading files.
         /// </summary>
-        private static Dictionary<Thread, List<string>> _threadFilenames = new Dictionary<Thread, List<string>>();
+        private static readonly Dictionary<Thread, List<string>> ThreadFilenames = new Dictionary<Thread, List<string>>();
 
         /// <summary>
         /// Get the current filename associated with this thread.
@@ -215,10 +213,10 @@ namespace Utils
         public static string GetFilename()
         {
             Thread thread = Thread.CurrentThread;
-            if (!_threadFilenames.ContainsKey(thread))
+            if (!ThreadFilenames.ContainsKey(thread))
                 return string.Empty;
 
-            List<string> filenames = _threadFilenames[thread];
+            List<string> filenames = ThreadFilenames[thread];
             return filenames[filenames.Count - 1];
         }
 
@@ -229,10 +227,10 @@ namespace Utils
         public static void PushFilename(string filename)
         {
             Thread thread = Thread.CurrentThread;
-            if (!_threadFilenames.ContainsKey(thread))
-                _threadFilenames.Add(thread, new List<string>());
+            if (!ThreadFilenames.ContainsKey(thread))
+                ThreadFilenames.Add(thread, new List<string>());
 
-            _threadFilenames[thread].Add(filename);
+            ThreadFilenames[thread].Add(filename);
         }
 
         /// <summary>
@@ -242,13 +240,13 @@ namespace Utils
         public static void PopFilename(string filename)
         {
             Thread thread = Thread.CurrentThread;
-            if (!_threadFilenames.ContainsKey(thread))
+            if (!ThreadFilenames.ContainsKey(thread))
                 return;
 
-            List<string> filenames = _threadFilenames[thread];
+            List<string> filenames = ThreadFilenames[thread];
             filenames.Remove(filename);
             if (filenames.Count == 0)
-                _threadFilenames.Remove(thread);
+                ThreadFilenames.Remove(thread);
         }
 
         # endregion

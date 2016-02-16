@@ -1,44 +1,40 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Utils
 {
     public class ObjectIdGenerator
     {
-        private static ObjectIdGenerator instance = null;
-        private static object myLock = new object();
+        private static ObjectIdGenerator _instance;
+        private static readonly object MyLock = new object();
 
         public static ObjectIdGenerator Instance
         {
             get
             {
-                if (instance == null)
-                    lock (myLock)
+                if (_instance == null)
+                    lock (MyLock)
                     {
-                        instance = new ObjectIdGenerator();
+                        _instance = new ObjectIdGenerator();
                     }
-                return instance;
+                return _instance;
             }
         }
 
-        private Int32 nextId = 1;
+        private Int32 _nextId = 1;
 
         public Int32 GetNextIdNumber()
         {
-            if (nextId == Int32.MaxValue)
-                nextId = 1;
-            return nextId++;
+            if (_nextId == Int32.MaxValue)
+                _nextId = 1;
+            return _nextId++;
         }
 
         public Int32 GetNextBlock(Int32 blockSize)
         {
-            if (nextId == Int32.MaxValue)
-                nextId = 1;
-            Int32 result = nextId;
-            nextId += blockSize;
+            if (_nextId == Int32.MaxValue)
+                _nextId = 1;
+            Int32 result = _nextId;
+            _nextId += blockSize;
             return result;
         }
 

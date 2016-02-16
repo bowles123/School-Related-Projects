@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using log4net;
 
@@ -9,16 +7,16 @@ namespace Utils
     public abstract class BackgroundThread : IDisposable
     {
         #region Private data members
-        private static readonly ILog log = LogManager.GetLogger(typeof(BackgroundThread));
+        private static readonly ILog Logger = LogManager.GetLogger(typeof(BackgroundThread));
 
-        protected Thread myThread = null;
-        protected bool keepGoing = false;
-        protected bool suspended = false;
+        private Thread _processThread;
+        private bool _suspended;
+
+        protected bool KeepGoing { get; set; }
+
         #endregion
 
         #region Constructors and destruction
-        public BackgroundThread() { }
-
         public void Dispose()
         {
             Stop();
@@ -33,35 +31,35 @@ namespace Utils
 
             try
             {
-                keepGoing = true;
-                suspended = false;
-                log.Info("Starting " + Label);
+                KeepGoing = true;
+                _suspended = false;
+                Logger.Info("Starting " + Label);
                 ThreadPool.QueueUserWorkItem(Process, null);
             }
             catch (Exception err)
             {
-                log.Fatal("Aborted exception caught", err);
+                Logger.Fatal("Aborted exception caught", err);
             }
         }
 
         public virtual void Stop()
         {
-            log.Info("Stopping " + Label);
-            keepGoing = false;                      // Clear the flag that keep the background
+            Logger.Info("Stopping " + Label);
+            KeepGoing = false;                      // Clear the flag that keep the background
             Thread.Sleep(0);
 
             // thread in its main loop
             if (IsRunning)
-                myThread.Join();                        // Wait for background thread to terminate
+                _processThread.Join();                        // Wait for background thread to terminate
 
-            myThread = null;                            // deference the background thread so it will be
+            _processThread = null;                            // deference the background thread so it will be
                                                         // garabage collected
-            log.Debug("Leaving Stop");
+            Logger.Debug("Leaving Stop");
         }
 
         public bool IsRunning
         {
-            get { return (myThread != null && myThread.IsAlive); }
+            get { return (_processThread != null && _processThread.IsAlive); }
         }
 
         public virtual string Status
@@ -69,31 +67,19 @@ namespace Utils
             get
             {
                 string result = "Not running";
-                if (keepGoing)
-                    result = (suspended) ? "Suspended" : "Running";
+                if (KeepGoing)
+                    result = (_suspended) ? "Suspended" : "Running";
                 return result;
             }
         }
 
-        public virtual void Suspend()
-        {
-            if (Suspended == false)
-                Suspended = true;
-        }
-
-        public virtual void Resume()
-        {
-            if (Suspended == true)
-                Suspended = false;
-        }
-
         public virtual bool Suspended
         {
-            get { return suspended; }
+            get { return _suspended; }
             set
             {
-                suspended = value;
-                log.Info(Label + " - " + Status);
+                _suspended = value;
+                Logger.Info(Label + " - " + Status);
             }
         }
 
@@ -103,11 +89,10 @@ namespace Utils
         /// <summary>
         /// Main process method for background thread
         /// 
-        /// This method should stop whatever it is doing and terminate whenever keepGoing becomes false. 
+        /// This method should stop whatever it is doing and terminate whenever KeepGoing becomes false. 
         /// Also, it should not actually do any process anything but stay alive, if suspend becomes true.
         /// </summary>
         protected abstract void Process(Object state);
-
 
         #endregion
 
