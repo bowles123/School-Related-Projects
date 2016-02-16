@@ -29,7 +29,8 @@ namespace TcpInitiator
             // as a parameter.  That constructor binds the TcpClient to a local end point;
             // it does not connect the client to a remote end point.
 
-            NetworkStream stream = client.GetStream();           
+            NetworkStream stream = client.GetStream();  
+         
             byte[] bytes = System.Text.Encoding.ASCII.GetBytes(messageTosend);
             for (int i=0; i<repeatCount; i++)
                 stream.Write(bytes, 0, bytes.Length);
