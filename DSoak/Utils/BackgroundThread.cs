@@ -8,8 +8,6 @@ namespace Utils
     {
         #region Private data members
         private static readonly ILog Logger = LogManager.GetLogger(typeof(BackgroundThread));
-
-        private Thread _processThread;
         private bool _suspended;
 
         protected bool KeepGoing { get; set; }
@@ -45,21 +43,9 @@ namespace Utils
         public virtual void Stop()
         {
             Logger.Info("Stopping " + Label);
-            KeepGoing = false;                      // Clear the flag that keep the background
-            Thread.Sleep(0);
-
-            // thread in its main loop
-            if (IsRunning)
-                _processThread.Join();                        // Wait for background thread to terminate
-
-            _processThread = null;                            // deference the background thread so it will be
-                                                        // garabage collected
+            KeepGoing = false;                              // Clear the flag that keep the background
+            Thread.Sleep(0);                                // Give up the processor so other threads will run
             Logger.Debug("Leaving Stop");
-        }
-
-        public bool IsRunning
-        {
-            get { return (_processThread != null && _processThread.IsAlive); }
         }
 
         public virtual string Status
