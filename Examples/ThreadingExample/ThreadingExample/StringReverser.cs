@@ -7,6 +7,7 @@ namespace ThreadingExample
     {
         private bool _keepGoing;
 
+        public string Label {  get; set; }
         public WorkQueue MyWorkQueue { get; set; }
 
         private Thread _myThread;
@@ -49,7 +50,8 @@ namespace ThreadingExample
             }
 
             item.ReversedString = reversedString;
-            Console.WriteLine("{0,-25} {1}: {2}...{3}",
+            Console.WriteLine("{0,5} {1,-25} {2}: {3}...{4}",
+                    Label,
                     "Reversed string for item",
                     item.Id,
                     item.ReversedString.Substring(0, 15),
