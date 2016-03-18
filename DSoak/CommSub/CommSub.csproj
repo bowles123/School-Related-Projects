@@ -50,7 +50,6 @@
     <Compile Include="CommSubsystem.cs" />
     <Compile Include="CommProcess.cs" />
     <Compile Include="ConversationFactory.cs" />
-    <Compile Include="Conversations\InitiatorConversations\UnreliableMulticastThruProxy.cs" />
     <Compile Include="Conversations\InitiatorConversations\UnreliableMulticast.cs" />
     <Compile Include="Error.cs" />
     <Compile Include="KnownGameProcesses.cs" />

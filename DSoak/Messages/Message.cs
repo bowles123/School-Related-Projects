@@ -50,6 +50,7 @@ namespace Messages
             Register(typeof(RegisterGameRequest));
             Register(typeof(ShutdownRequest));
             Register(typeof(ThrowBalloonRequest));
+            Register(typeof(Routing));
         }
 
         private static readonly ILog Logger = LogManager.GetLogger(typeof(Message));

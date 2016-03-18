@@ -6,6 +6,7 @@ using System.Threading;
 using SharedObjects;
 
 using log4net;
+using Messages;
 
 namespace CommSub
 {
@@ -71,6 +72,11 @@ namespace CommSub
             else
             {
                 Type messageType = env.Message.GetType();
+                Routing routing = env.Message as Routing;
+                if (routing != null)
+                    messageType = routing.InnerMessage.GetType();
+                
+                Logger.DebugFormat("See if {0} is valid for a {1} conversation", messageType, GetType().Name);
                 if (!allowedTypes.Contains(messageType))
                 {
                     Error = Error.Get(Error.StandardErrorNumbers.InvalidTypeOfMessage);

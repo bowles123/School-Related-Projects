@@ -3,6 +3,7 @@
 using Utils;
 
 using log4net;
+using Messages;
 
 namespace CommSub
 {
@@ -39,17 +40,20 @@ namespace CommSub
             }
             else
             {
-                if (CommSubsystem.ConversationFactory.IncomingMessageCanStartConversation(e.Message.GetType()))
-                    Dispatch(e);
+                Routing routing = e.Message as Routing;
+                Type messageType = routing != null ? routing.InnerMessage.GetType() : e.Message.GetType();
+
+                if (CommSubsystem.ConversationFactory.IncomingMessageCanStartConversation(messageType))
+                    Dispatch(messageType, e);
                 else
                     Logger.WarnFormat("Unexcepted incoming message of type {0}", e.Message.GetType().Name);
             }
         }
 
 
-        private void Dispatch(Envelope incomingRequestEnvelope)
+        private void Dispatch(Type messageType, Envelope incomingRequestEnvelope)
         {
-            Conversation conversation = CommSubsystem.ConversationFactory.CreateFromMessageType(incomingRequestEnvelope.Message.GetType(), incomingRequestEnvelope);
+            Conversation conversation = CommSubsystem.ConversationFactory.CreateFromMessageType(messageType, incomingRequestEnvelope);
             if (conversation == null)
                 Logger.WarnFormat("Cannot find strategy for {0}", incomingRequestEnvelope.Message.GetType().Name);
             else

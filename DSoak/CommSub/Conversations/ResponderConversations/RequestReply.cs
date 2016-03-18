@@ -16,6 +16,9 @@ namespace CommSub.Conversations.ResponderConversations
         private int _fromProcessId;
         #endregion
 
+        protected Message Request { get { return _request; } }
+        protected int FromProcessId { get { return _fromProcessId; } }
+
         /// <summary>
         /// Execute the responder side of a request-reply conversation
         /// 
@@ -56,7 +59,7 @@ namespace CommSub.Conversations.ResponderConversations
                     Logger.DebugFormat("Reply to {0} message from {1}", _request.GetType().Name, _fromProcessId);
 
                     Message reply = CreateReply();
-                    reply.SetMessageAndConversationNumbers(MessageNumber.Create(), IncomingEnvelope.Message.ConvId);
+                    reply.SetMessageAndConversationNumbers(MessageNumber.Create(), _request.ConvId);
 
                     Envelope replyEnv = new Envelope();
                     if (_routingMessage != null)
