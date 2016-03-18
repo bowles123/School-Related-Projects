@@ -11,14 +11,23 @@ namespace ThreadingExample
         static void Main(string[] args)
         {
             WorkQueue queue = new WorkQueue();
-            StringGenerator gen1 = new StringGenerator() { NextWorkItemId = 1000, MyWorkQueue = queue };
+            StringGenerator gen1 = new StringGenerator()
+            {
+                Label = "A",
+                NextWorkItemId = 1000,
+                NumberToCreate = 100,
+                MyWorkQueue = queue
+            };
             gen1.Start();
 
-            StringReverser rev1 = new StringReverser() {MyWorkQueue = queue};
+            StringReverser rev1 = new StringReverser() { Label = "B", MyWorkQueue = queue};
             rev1.Start();
 
-            StringReverser rev2 = new StringReverser() { MyWorkQueue = queue };
+            StringReverser rev2 = new StringReverser() { Label = "C", MyWorkQueue = queue };
             rev2.Start();
+
+            StringReverser rev3 = new StringReverser() { Label = "D", MyWorkQueue = queue };
+            rev3.Start();
 
             Console.WriteLine("Hit ENTER to exit");
             Console.ReadLine();
@@ -26,6 +35,7 @@ namespace ThreadingExample
             gen1.Stop();
             rev1.Stop();
             rev2.Stop();
+            rev3.Stop();
         }
     }
 }

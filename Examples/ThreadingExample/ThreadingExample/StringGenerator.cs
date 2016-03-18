@@ -8,12 +8,20 @@ namespace ThreadingExample
         private static readonly Random Randomizer = new Random();
         private bool _keepGoing;
 
+        public string Label { get; set; }
         public int NextWorkItemId { get; set; }
+        public int NumberToCreate { get; set; }
         public WorkQueue MyWorkQueue { get; set; }
 
         public void Start()
         {
             _keepGoing = true;
+
+            if (NextWorkItemId <= 0)
+                NextWorkItemId = 1;
+
+            if (NumberToCreate <= 0)
+                NumberToCreate = 100;
 
             ThreadPool.QueueUserWorkItem(Process, null);
         }
@@ -41,7 +49,8 @@ namespace ThreadingExample
                 }
 
                 WorkItem item = new WorkItem() {Id = NextWorkItemId++, InitialString = newString};
-                Console.WriteLine("{0,-25} {1}: {2}...{3}",
+                Console.WriteLine("{0, -5} {1,-25} {2}: {3}...{4}",
+                                    Label,
                                     "Generated string for item",
                                     item.Id,
                                     item.InitialString.Substring(0, 15),
