@@ -70,7 +70,6 @@ namespace CommSub.Conversations.InitiatorConversations
                             env.EndPoint = Process.ProxyEndPoint;
                         }
 
-                        env.Message.InitMessageAndConversationNumbers();
                         ReliableSend(env);
                     }
                     else
@@ -153,16 +152,17 @@ namespace CommSub.Conversations.InitiatorConversations
             bool result = false;
             if (IsEnvelopeValid(replyEnvelope, AllowedReplyTypes))
             {
-                Logger.DebugFormat("Received a {0} message back", replyEnvelope.Message.GetType().Name);
-                Reply reply = replyEnvelope.Message as Reply;
+                Routing routing = replyEnvelope.Message as Routing;
+                Reply reply = (routing!=null) ? routing.InnerMessage as Reply : replyEnvelope.Message as Reply;
+               
                 if (reply != null && reply.Success)
                 {
+                    Logger.DebugFormat("Received a {0} message back", reply.GetType().Name);
                     ProcessReply(reply);
                 }
                 else
                 {
-                    string errorMessage = string.Format("{0} failed because {1}", GetType().Name,
-                        (reply == null) ? string.Empty : reply.Note);
+                    string errorMessage = string.Format("{0} failed because {1}", GetType().Name, (reply == null) ? string.Empty : reply.Note);
                     Process.RaiseErrorOccurredEvent(new Error() { Message = errorMessage });
                     Logger.Warn(errorMessage);
                     PostFailureAction();

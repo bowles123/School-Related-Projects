@@ -46,7 +46,7 @@ namespace CommSub
                 if (CommSubsystem.ConversationFactory.IncomingMessageCanStartConversation(messageType))
                     Dispatch(messageType, e);
                 else
-                    Logger.WarnFormat("Unexcepted incoming message of type {0}", e.Message.GetType().Name);
+                    Logger.WarnFormat("Unexcepted incoming message of type {0}", messageType.Name);
             }
         }
 
