@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SharedObjects;
 
-namespace SharedObjectTesting
+namespace SharedObjectsTesting
 {
     [TestClass]
     public class MessageNumberTester

@@ -6,8 +6,6 @@ using System.Runtime.Serialization.Json;
 
 using SharedObjects;
 using log4net;
-using Messages.ReplyMessages;
-using Messages.RequestMessages;
 
 namespace Messages
 {
@@ -16,20 +14,16 @@ namespace Messages
     {
         private static readonly ILog Logger = LogManager.GetLogger(typeof(Message));
 
-        private static readonly List<Type> SerializableTypes = new List<Type>()
+        private static List<Type> _serializableTypes;
+
+        public static void Register(Type T)
         {
-            typeof(AliveRequest),
-            typeof(GameListRequest),
-            typeof(GameListReply),
-            typeof(JoinGameReply),
-            typeof(JoinGameRequest),
-            typeof(LoginRequest),
-            typeof(LoginReply),
-            typeof(LogoutRequest),
-            typeof(Request),
-            typeof(Reply),
-            typeof(Umbrella)
-        };
+            if (_serializableTypes==null)
+                _serializableTypes = new List<Type>();
+
+            if (!_serializableTypes.Contains(T))
+                _serializableTypes.Add(T);
+        }
 
         [DataMember]
         public MessageNumber MsgId { get; set; }
@@ -73,7 +67,7 @@ namespace Messages
         /// <returns>A byre array containing the JSON serializations of the message</returns>
         public byte[] Encode()
         {
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Message), SerializableTypes);
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Message), _serializableTypes);
             MemoryStream mstream = new MemoryStream();
             serializer.WriteObject(mstream, this);
 
@@ -95,7 +89,7 @@ namespace Messages
                 try
                 {
                     MemoryStream mstream = new MemoryStream(bytes);
-                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Message), SerializableTypes);
+                    DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Message), _serializableTypes);
                     result = (Message)serializer.ReadObject(mstream);
                 }
                 catch (Exception err)

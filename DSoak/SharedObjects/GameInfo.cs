@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
 namespace SharedObjects
@@ -10,59 +8,61 @@ namespace SharedObjects
     [DataContract]
     public class GameInfo
     {
-        private List<ProcessInfo> currentProcesses = null;
-        private object myLock;
+        private List<GameProcessData> _currentProcesses;
+        private object _myLock;
 
         public enum StatusCode { NotInitialized=1, Initializing=2, Available=4,  Starting=8, InProgress=16, Ending=32, Complete=64, Cancelled=128 };
 
         [DataMember]
         public Int32 GameId { get; set; }
         [DataMember]
+        public int GameManagerId { get; set; }
+        [DataMember]
         public string Label { get; set; }
         [DataMember]
         public StatusCode Status { get; set; }
         [DataMember]
-        public ProcessInfo GameManager { get; set; }
+        public int MinPlayers { get; set; }
         [DataMember]
-        public Int32 MinPlayers { get; set; }
+        public int MaxPlayers { get; set; }
         [DataMember]
-        public Int32 MaxPlayers { get; set; }
-        [DataMember]
-        public Int32 StartingNumberOfPlayers { get; set; }
+        public int[] StartingPlayers { get; set; }
 
-        public ProcessInfo[] CurrentProcesses
+        [DataMember]
+        public GameProcessData[] CurrentProcesses
         {
             get
             {
-                if (currentProcesses == null)
-                    currentProcesses = new List<ProcessInfo>();
-                if (myLock == null)
-                    myLock = new object();
-
-                ProcessInfo[] result = null;
-                lock (myLock)
+                if (_myLock == null)
+                    _myLock = new object();
+                
+                lock (_myLock)
                 {
-                    result = currentProcesses.ToArray();
+                    if (_currentProcesses == null)
+                        _currentProcesses = new List<GameProcessData>();
+                }
+
+                GameProcessData[] result;
+                lock (_myLock)
+                {
+                    result = _currentProcesses.ToArray();
                 }
                 return result;
             }
             set
             {
-                if (myLock == null)
-                    myLock = new object();
+                if (_myLock == null)
+                    _myLock = new object();
 
-                lock (myLock)
+                lock (_myLock)
                 {
-                    if (value == null)
-                        currentProcesses = new List<ProcessInfo>();
-                    else
-                        currentProcesses = value.ToList();
+                    _currentProcesses = (value == null) ? new List<GameProcessData>() : value.ToList();
                 }
             }
         }
 
         [DataMember]
-        public Int32 Winner { get; set; }
+        public int[] Winners { get; set; }
 
         public GameInfo()
         {
@@ -72,52 +72,69 @@ namespace SharedObjects
         public GameInfo Clone()
         {
             GameInfo clone = MemberwiseClone() as GameInfo;
-            clone.GameManager = GameManager.Clone();
             return clone;
         }
 
-        public ProcessInfo FindCurrentProcess(int processId)
+        public GameProcessData FindCurrentProcess(int processId)
         {
-            ProcessInfo process = null;
-            if (currentProcesses != null)
+            GameProcessData process = null;
+            if (_currentProcesses != null)
             {
-                if (myLock == null)
-                    myLock = new object();
+                if (_myLock == null)
+                    _myLock = new object();
 
-                lock (myLock)
+                lock (_myLock)
                 {
-                    process = currentProcesses.Find(p => p.ProcessId == processId);
+                    process = _currentProcesses.Find(p => p.ProcessId == processId);
                 }
             }
             return process;
         }
 
-        public void AddCurrentProcess(ProcessInfo process)
+        public void AddProcess(GameProcessData process)
         {
-            if (myLock == null)
-                myLock = new object();
+            if (_myLock == null)
+                _myLock = new object();
 
-            lock (myLock)
+            lock (_myLock)
             {
                 if (process != null)
                 {
-                    if (currentProcesses == null)
-                        currentProcesses = new List<ProcessInfo>();
-                    currentProcesses.Add(process);
+                    if (_currentProcesses == null)
+                        _currentProcesses = new List<GameProcessData>();
+                    _currentProcesses.Add(process);
                 }
             }
         }
 
-        public void RemoveCurrentProcess(int processId)
+        public void RemoveProcess(int processId)
         {
-            if (currentProcesses != null)
+            if (_currentProcesses != null)
             {
-                if (myLock == null)
-                    myLock = new object();
+                if (_myLock == null)
+                    _myLock = new object();
 
-                lock (myLock)
+                lock (_myLock)
                 {
-                    currentProcesses.RemoveAll(p => p.ProcessId == processId);
+                    _currentProcesses.RemoveAll(p => p.ProcessId == processId);
+                }
+            }
+        }
+
+        public void ComputeStartingPlayers()
+        {
+            if (_myLock == null)
+                _myLock = new object();
+
+            lock (_myLock)
+            {
+                if (_currentProcesses == null)
+                    StartingPlayers = new int[0];
+                else
+                {
+                    List<GameProcessData> players =
+                        _currentProcesses.FindAll(p => p.Type == ProcessInfo.ProcessType.Player);
+                    StartingPlayers = players.Select(p => p.ProcessId).ToArray();
                 }
             }
         }
@@ -127,6 +144,7 @@ namespace SharedObjects
             if (MinPlayers == 0) MinPlayers = 2;
             if (MaxPlayers == 0) MaxPlayers = 20;
             if ((int) Status == 0) Status = StatusCode.NotInitialized;
+            if (StartingPlayers == null) StartingPlayers = new int[0];
         }
     }
 }

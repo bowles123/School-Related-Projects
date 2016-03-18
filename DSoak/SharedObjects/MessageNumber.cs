@@ -14,7 +14,7 @@ namespace SharedObjects
 
         #region Public Properties
         public static Int32 LocalProcessId { get; set; }            // Local process Id -- set once when the
-                                                                    // process joins the distributed application
+                                                                    // process logins to the distributed application
         [DataMember]
         public Int32 Pid { get; set; }
         [DataMember]

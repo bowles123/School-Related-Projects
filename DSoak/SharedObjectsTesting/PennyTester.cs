@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SharedObjects;
 
-namespace SharedObjectTesting
+namespace SharedObjectsTesting
 {
     [TestClass]
     public class PennyTester
