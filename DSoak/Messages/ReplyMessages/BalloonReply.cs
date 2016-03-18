@@ -7,8 +7,6 @@ namespace Messages.ReplyMessages
     [DataContract]
     public class BalloonReply : Reply
     {
-        static BalloonReply() { Register(typeof(BalloonReply)); }
-
         [DataMember]
         public Balloon Balloon { get; set; }
     }

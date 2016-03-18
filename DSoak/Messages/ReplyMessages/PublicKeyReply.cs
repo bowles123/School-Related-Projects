@@ -6,8 +6,6 @@ namespace Messages.ReplyMessages
     [DataContract]
     public class PublicKeyReply : Reply
     {
-        static PublicKeyReply() { Register(typeof(PublicKeyReply)); }
-
         [DataMember]
         public int ProcessId { get; set; }
         [DataMember]

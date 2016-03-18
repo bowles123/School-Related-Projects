@@ -7,8 +7,6 @@ namespace Messages.ReplyMessages
     [DataContract]
     public class LoginReply : Reply
     {
-        static LoginReply() { Register(typeof(LoginReply)); }
-
         [DataMember]
         public ProcessInfo ProcessInfo { get; set; }
 

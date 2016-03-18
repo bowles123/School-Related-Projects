@@ -6,8 +6,6 @@ namespace Messages.RequestMessages
     [DataContract]
     public class LoginRequest : Request
     {
-        static LoginRequest() { Register(typeof(LoginRequest)); }
-
         [DataMember]
         public ProcessInfo.ProcessType ProcessType { get; set; }
 

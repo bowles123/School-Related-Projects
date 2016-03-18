@@ -4,6 +4,8 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
+using Messages.RequestMessages;
+using Messages.ReplyMessages;
 using SharedObjects;
 using log4net;
 
@@ -12,6 +14,44 @@ namespace Messages
     [DataContract]
     public class Message
     {
+        static Message()
+        {
+            Register(typeof(BalloonReply));
+            Register(typeof(Bid));
+            Register(typeof(BidAck));
+            Register(typeof(GameListReply));
+            Register(typeof(JoinGameReply));
+            Register(typeof(LoginReply));
+            Register(typeof(NextIdReply));
+            Register(typeof(PublicKeyReply));
+            Register(typeof(Reply));
+            Register(typeof(StartGame));
+
+            Register(typeof (AliveRequest));
+            Register(typeof(AllowanceAllocationRequest));
+            Register(typeof(AllowanceDeliveryRequest));
+            Register(typeof(AuctionAnnouncement));
+            Register(typeof(BuyBalloonRequest));
+            Register(typeof(DeadProcessNotification));
+            Register(typeof(FillBalloonRequest));
+            Register(typeof(GameListRequest));
+            Register(typeof(GameStatusNotification));
+            Register(typeof(GetKeyRequest));
+            Register(typeof(HitNotification));
+            Register(typeof(JoinGameRequest));
+            Register(typeof(LeaveGameRequest));
+            Register(typeof(LoginRequest));
+            Register(typeof(LogoutRequest));
+            Register(typeof(LowerUmbrella));
+            Register(typeof(NextIdRequest));
+            Register(typeof(PennyValidation));
+            Register(typeof(RaiseUmbrella));
+            Register(typeof(ReadyToStart));
+            Register(typeof(RegisterGameRequest));
+            Register(typeof(ShutdownRequest));
+            Register(typeof(ThrowBalloonRequest));
+        }
+
         private static readonly ILog Logger = LogManager.GetLogger(typeof(Message));
 
         private static List<Type> _serializableTypes;
