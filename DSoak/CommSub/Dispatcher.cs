@@ -3,7 +3,6 @@
 using Utils;
 
 using log4net;
-using Messages;
 
 namespace CommSub
 {
@@ -40,8 +39,7 @@ namespace CommSub
             }
             else
             {
-                Routing routing = e.Message as Routing;
-                Type messageType = routing != null ? routing.InnerMessage.GetType() : e.Message.GetType();
+                Type messageType = e.ActualMessageType;
 
                 if (CommSubsystem.ConversationFactory.IncomingMessageCanStartConversation(messageType))
                     Dispatch(messageType, e);

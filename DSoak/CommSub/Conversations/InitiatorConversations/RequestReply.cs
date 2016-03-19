@@ -83,7 +83,7 @@ namespace CommSub.Conversations.InitiatorConversations
 
             if (Error != null)
             {
-                Process.RaiseErrorOccurredEvent(Error);
+                Process.RecordError(Error);
                 Logger.Warn(Error.Message);
             }
 
@@ -152,9 +152,7 @@ namespace CommSub.Conversations.InitiatorConversations
             bool result = false;
             if (IsEnvelopeValid(replyEnvelope, AllowedReplyTypes))
             {
-                Routing routing = replyEnvelope.Message as Routing;
-                Reply reply = (routing!=null) ? routing.InnerMessage as Reply : replyEnvelope.Message as Reply;
-               
+                Reply reply = replyEnvelope.ActualMessage as Reply;               
                 if (reply != null && reply.Success)
                 {
                     Logger.DebugFormat("Received a {0} message back", reply.GetType().Name);
@@ -163,7 +161,7 @@ namespace CommSub.Conversations.InitiatorConversations
                 else
                 {
                     string errorMessage = string.Format("{0} failed because {1}", GetType().Name, (reply == null) ? string.Empty : reply.Note);
-                    Process.RaiseErrorOccurredEvent(new Error() { Message = errorMessage });
+                    Process.RecordError(new Error() { Message = errorMessage });
                     Logger.Warn(errorMessage);
                     PostFailureAction();
                 }
@@ -172,7 +170,7 @@ namespace CommSub.Conversations.InitiatorConversations
             else
             {
                 string errorMessage = string.Format("{0} is an invalid reply for a {1}", replyEnvelope.Message.GetType().Name, GetType().Name);
-                Process.RaiseErrorOccurredEvent(new Error() { Message = errorMessage });
+                Process.RecordError(new Error() { Message = errorMessage });
                 Logger.Warn(errorMessage);
             }
 

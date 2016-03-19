@@ -17,8 +17,6 @@ namespace CommSub
         #endregion
 
         #region Public Events
-        public event StateChange.Handler StateChanged;
-        public event StateChange.Handler ErrorOccurred;
         public event StateChange.Handler Shutdown;
         #endregion
 
@@ -69,24 +67,9 @@ namespace CommSub
 
         #region Event Raising Methods
 
-        public void RaiseStateChangedEvent()
+        public void RecordError(Error error)
         {
-            if (StateChanged != null)
-            {
-                Logger.Debug("Raise StateChanged event");
-                StateChanged(new StateChange() { Type = StateChange.ChangeType.Update, Subject = this });
-                Logger.Debug("Back from raising StateChanged event");
-            }
-        }
-
-        public void RaiseErrorOccurredEvent(Error error)
-        {
-            if (ErrorOccurred != null)
-            {
-                Logger.DebugFormat("Raise ErrorOccurred event, error = {0}", error);
-                ErrorOccurred(new StateChange() { Type = StateChange.ChangeType.Error, Subject = error });
-                Logger.Debug("Back from raising ErrorChanged event");
-            }
+            // TODO: Record error
         }
 
         public void RaiseShutdownEvent()
@@ -121,7 +104,6 @@ namespace CommSub
         public void ChangeStatus(ProcessInfo.StatusCode newStatus)
         {
             MyProcessInfo.Status = newStatus;
-            RaiseStateChangedEvent();
         }
 
         public void DoShutdown()

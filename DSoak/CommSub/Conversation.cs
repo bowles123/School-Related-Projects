@@ -46,7 +46,7 @@ namespace CommSub
         public void Launch(object context = null)
         {
             bool result = ThreadPool.QueueUserWorkItem(Execute, context);
-            Logger.DebugFormat("Launch result = {0}", result);
+            Logger.DebugFormat("Launch of {0}, result = {1}", GetType().Name, result);
         }
 
         public abstract void Execute(object context = null);
@@ -71,10 +71,7 @@ namespace CommSub
             }
             else
             {
-                Type messageType = env.Message.GetType();
-                Routing routing = env.Message as Routing;
-                if (routing != null)
-                    messageType = routing.InnerMessage.GetType();
+                Type messageType = env.ActualMessageType;
                 
                 Logger.DebugFormat("See if {0} is valid for a {1} conversation", messageType, GetType().Name);
                 if (!allowedTypes.Contains(messageType))

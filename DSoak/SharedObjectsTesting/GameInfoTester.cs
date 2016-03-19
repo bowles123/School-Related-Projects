@@ -73,24 +73,6 @@ namespace SharedObjectsTesting
             Assert.AreEqual(1, g3.Winners.Length);
             Assert.AreEqual(12, g3.Winners[0]);
 
-            GameProcessData p20 = new GameProcessData() { ProcessId = 20, Type = ProcessInfo.ProcessType.Player};
-            g3.AddProcess(p20);
-            Assert.AreEqual(8, g3.CurrentProcesses.Length);
-            Assert.AreSame(p20, g3.FindCurrentProcess(20));
-
-            GameProcessData p21 = new GameProcessData() { ProcessId = 21, Type = ProcessInfo.ProcessType.Player };
-            g3.AddProcess(p21);
-            Assert.AreEqual(9, g3.CurrentProcesses.Length);
-            Assert.AreSame(p21, g3.FindCurrentProcess(21));
-
-            GameProcessData p22 = new GameProcessData() { ProcessId = 22, Type = ProcessInfo.ProcessType.Player };
-            g3.AddProcess(p22);
-            Assert.AreEqual(10, g3.CurrentProcesses.Length);
-            Assert.AreSame(p22, g3.FindCurrentProcess(22));
-
-            g3.RemoveProcess(21);
-            Assert.AreEqual(9, g3.CurrentProcesses.Length);
-            Assert.IsNull(g3.FindCurrentProcess(21));
         }
 
     }

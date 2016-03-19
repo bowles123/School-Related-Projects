@@ -2,14 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Security.Policy;
 
 namespace SharedObjects
 {
     [DataContract]
     public class GameInfo
     {
-        private List<GameProcessData> _currentProcesses;
         private object _myLock;
+        private bool _isDirty;
+
+        private StatusCode _status;
+        private int[] _startingPlayers;
+        private List<GameProcessData> _currentProcesses;
+        private int[] _winners;
 
         public enum StatusCode { NotInitialized=1, Initializing=2, Available=4,  Starting=8, InProgress=16, Ending=32, Complete=64, Cancelled=128 };
 
@@ -20,13 +26,50 @@ namespace SharedObjects
         [DataMember]
         public string Label { get; set; }
         [DataMember]
-        public StatusCode Status { get; set; }
-        [DataMember]
         public int MinPlayers { get; set; }
         [DataMember]
         public int MaxPlayers { get; set; }
+
         [DataMember]
-        public int[] StartingPlayers { get; set; }
+        public StatusCode Status
+        {
+            get { return _status; }
+            set
+            {
+                if (_myLock == null)
+                    _myLock = new object();
+
+                lock (_myLock)
+                {
+                    if (_status != value)
+                    {
+                        _isDirty = true;
+                        _status = value;
+                    }
+                }
+            }
+        }
+
+        [DataMember]
+        public int[] StartingPlayers
+        {
+            get { return _startingPlayers; }
+            set
+            {
+                if (_myLock == null)
+                    _myLock = new object();
+
+                lock (_myLock)
+                {
+                    if (_startingPlayers != value)
+                    {
+                        _isDirty = true;
+                        _startingPlayers = value;
+                    }
+                }
+            }
+            
+        }
 
         [DataMember]
         public GameProcessData[] CurrentProcesses
@@ -40,6 +83,7 @@ namespace SharedObjects
                 {
                     if (_currentProcesses == null)
                         _currentProcesses = new List<GameProcessData>();
+
                 }
 
                 GameProcessData[] result;
@@ -57,12 +101,29 @@ namespace SharedObjects
                 lock (_myLock)
                 {
                     _currentProcesses = (value == null) ? new List<GameProcessData>() : value.ToList();
+                    _isDirty = true;
                 }
             }
         }
 
         [DataMember]
-        public int[] Winners { get; set; }
+        public int[] Winners
+        {
+            get { return _winners; }
+            set
+            {
+                if (_myLock == null)
+                    _myLock = new object();
+
+                lock (_myLock)
+                {
+                    _winners = value;
+                    _isDirty = true;
+                }                
+            }
+        }
+
+        public bool IsDirty { get { return _isDirty; } } 
 
         public GameInfo()
         {
@@ -89,36 +150,6 @@ namespace SharedObjects
                 }
             }
             return process;
-        }
-
-        public void AddProcess(GameProcessData process)
-        {
-            if (_myLock == null)
-                _myLock = new object();
-
-            lock (_myLock)
-            {
-                if (process != null)
-                {
-                    if (_currentProcesses == null)
-                        _currentProcesses = new List<GameProcessData>();
-                    _currentProcesses.Add(process);
-                }
-            }
-        }
-
-        public void RemoveProcess(int processId)
-        {
-            if (_currentProcesses != null)
-            {
-                if (_myLock == null)
-                    _myLock = new object();
-
-                lock (_myLock)
-                {
-                    _currentProcesses.RemoveAll(p => p.ProcessId == processId);
-                }
-            }
         }
 
         public void ComputeStartingPlayers()

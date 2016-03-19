@@ -86,7 +86,7 @@ namespace CommSub.Conversations.ResponderConversations
             if (Error != null)
             {
                 Logger.Warn(Error.Message);
-                Process.RaiseErrorOccurredEvent(Error);
+                Process.RecordError(Error);
             }
 
             Done = true;

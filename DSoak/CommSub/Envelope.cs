@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 
 using Messages;
 using SharedObjects;
@@ -41,6 +42,28 @@ namespace CommSub
                         EndPoint != null &&
                         EndPoint.Host!="0.0.0.0" &&
                         EndPoint.Port!=0);
+            }
+        }
+
+        public Message ActualMessage
+        {
+            get
+            {
+                Routing routing = Message as Routing;
+                Message result = (routing != null) ? routing.InnerMessage : Message;
+                return result;
+            }
+        }
+
+        public Type ActualMessageType
+        {
+            get
+            {
+                Type type = null;
+                Message m = ActualMessage;
+                if (m != null)
+                    type = m.GetType();
+                return type;
             }
         }
     }

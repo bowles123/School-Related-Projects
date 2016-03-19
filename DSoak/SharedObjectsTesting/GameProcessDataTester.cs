@@ -64,6 +64,7 @@ namespace SharedObjectsTesting
             // TODO: Test ChangeLifePoints
             // TODO: Test ChnageHitPoints
             // TODO: Test concurrent access
+            // TODO: Test IsDirty
         }
     }
 }

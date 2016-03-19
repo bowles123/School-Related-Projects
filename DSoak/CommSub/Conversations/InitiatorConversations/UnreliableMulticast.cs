@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 
 using Messages;
-using Messages.RequestMessages;
 
 using SharedObjects;
 using log4net;
@@ -24,13 +23,14 @@ namespace CommSub.Conversations.InitiatorConversations
             {
                 if (IsProcessStateValid())
                 {
-                    Request request = CreateRequest();
-                    if (request != null)
+                    Message message = CreateMessage();
+                    if (message != null)
                     {
                         if (TargetEndPoints!=null && TargetEndPoints.Count>0)
-                            DirectMulticast(request);
-                        else if (TargetProcessIds!=null && TargetProcessIds.Count>0)
-                            IndirectMulticast(request);
+                            DirectMulticast(message);
+
+                        if (TargetProcessIds!=null && TargetProcessIds.Count>0)
+                            IndirectMulticast(message);
                     }
                     else
                         Error = new Error() {Message = "Cannot create message for unreliable multicast"};
@@ -44,18 +44,17 @@ namespace CommSub.Conversations.InitiatorConversations
             if (Error != null)
             {
                 Logger.Warn(Error.Message);
-                Process.RaiseErrorOccurredEvent(Error);
             }
 
             Done = true;
             Logger.DebugFormat("End {0}", GetType().Name);
         }
 
-        private void DirectMulticast(Request request)
+        private void DirectMulticast(Message message)
         {
-            Logger.DebugFormat("Sending message of type {0} to {1} processes", request.GetType().Name, TargetEndPoints.Count);
-            request.InitMessageAndConversationNumbers();
-            Envelope env = new Envelope() {Message = request};
+            Logger.DebugFormat("Sending message of type {0} to {1} processes", message.GetType().Name, TargetEndPoints.Count);
+            message.InitMessageAndConversationNumbers();
+            Envelope env = new Envelope() {Message = message};
 
             foreach (PublicEndPoint ep in TargetEndPoints)
             {
@@ -64,15 +63,15 @@ namespace CommSub.Conversations.InitiatorConversations
             }
         }
 
-        private void IndirectMulticast(Request request)
+        private void IndirectMulticast(Message message)
         {
-            Logger.DebugFormat("Sending message of type {0} to {1} processes", request.GetType().Name, TargetProcessIds.Count);
-            request.InitMessageAndConversationNumbers();
+            Logger.DebugFormat("Sending message of type {0} to {1} processes", message.GetType().Name, TargetProcessIds.Count);
+            message.InitMessageAndConversationNumbers();
             Envelope env = new Envelope()
             {
                 Message = new Routing()
                 {
-                    InnerMessage = request,
+                    InnerMessage = message,
                     ToProcessIds = TargetProcessIds.ToArray()
                 },
                 EndPoint = Process.ProxyEndPoint
@@ -99,6 +98,6 @@ namespace CommSub.Conversations.InitiatorConversations
         /// <returns>true if the process is in a state where it is okay for this conversation to execute</returns>
         protected virtual bool IsProcessStateValid() { return true; }
 
-        public abstract Request CreateRequest();
+        protected abstract Message CreateMessage();
     }
 }
