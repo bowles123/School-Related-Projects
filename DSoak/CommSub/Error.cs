@@ -5,7 +5,7 @@ namespace CommSub
 {
     public class Error
     {
-        private static readonly Dictionary<StandardErrorNumbers, Error> standardErrors;
+        private static readonly Dictionary<StandardErrorNumbers, Error> StandardErrors;
 
         public enum StandardErrorNumbers
         {
@@ -72,7 +72,7 @@ namespace CommSub
         static Error()
         {
             // Registry errors
-            standardErrors = new Dictionary<StandardErrorNumbers, Error>();
+            StandardErrors = new Dictionary<StandardErrorNumbers, Error>();
             Add(StandardErrorNumbers.NullEnvelopeOrMessage,     "Empty Envelope or Message");
             Add(StandardErrorNumbers.InvalidTypeOfMessage, "Invalid Type of Message");
             Add(StandardErrorNumbers.UnknownEndPoint, "Unknown End Point -- an unregistered process may be trying to communicate"); 
@@ -129,8 +129,8 @@ namespace CommSub
         public static Error Get(StandardErrorNumbers index)
         {
             Error error;
-            if (standardErrors.ContainsKey(index))
-                error = standardErrors[index].MemberwiseClone() as Error;
+            if (StandardErrors.ContainsKey(index))
+                error = StandardErrors[index].MemberwiseClone() as Error;
             else
                 error = new Error { Message = string.Format("Unknown Error {0}", index) };
 
@@ -140,7 +140,7 @@ namespace CommSub
 
         private static void Add(StandardErrorNumbers number, string message)
         {
-            standardErrors.Add(number, new Error() { Number = number, Message = message });
+            StandardErrors.Add(number, new Error() { Number = number, Message = message });
         }
 
     }

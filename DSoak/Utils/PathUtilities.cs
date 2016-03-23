@@ -21,7 +21,7 @@ namespace Utils
                 if (Assembly.GetEntryAssembly() != null)
                     return Assembly.GetEntryAssembly().Location;
                 else
-                    return string.Empty;
+                    return "./";
             }
         }
 

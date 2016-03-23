@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Security.Policy;
+using log4net.Repository.Hierarchy;
 
 namespace SharedObjects
 {
@@ -43,8 +45,8 @@ namespace SharedObjects
                 {
                     if (_status != value)
                     {
-                        _isDirty = true;
                         _status = value;
+                        _isDirty = true;
                     }
                 }
             }
@@ -61,7 +63,7 @@ namespace SharedObjects
 
                 lock (_myLock)
                 {
-                    if (_startingPlayers != value)
+                    if (StartingPlayersAreDifferent(value))
                     {
                         _isDirty = true;
                         _startingPlayers = value;
@@ -69,6 +71,21 @@ namespace SharedObjects
                 }
             }
             
+        }
+
+        private bool StartingPlayersAreDifferent(int[] newStartingPlayers)
+        {
+            bool result = (_startingPlayers == null && newStartingPlayers != null) ||
+                          (_startingPlayers != null && newStartingPlayers == null) ||
+                          (_startingPlayers != null && newStartingPlayers !=null &&
+                            _startingPlayers.Length != newStartingPlayers.Length);
+
+            if (!result && _startingPlayers != null && newStartingPlayers != null)
+            {
+                result = _startingPlayers.Any(p => !newStartingPlayers.Contains(p));
+            }
+
+            return result;
         }
 
         [DataMember]
@@ -123,7 +140,8 @@ namespace SharedObjects
             }
         }
 
-        public bool IsDirty { get { return _isDirty; } } 
+        public bool IsDirty { get { return _isDirty; } }
+        public void ClearDirtyFlag() { _isDirty = false;  }
 
         public GameInfo()
         {
@@ -134,22 +152,6 @@ namespace SharedObjects
         {
             GameInfo clone = MemberwiseClone() as GameInfo;
             return clone;
-        }
-
-        public GameProcessData FindCurrentProcess(int processId)
-        {
-            GameProcessData process = null;
-            if (_currentProcesses != null)
-            {
-                if (_myLock == null)
-                    _myLock = new object();
-
-                lock (_myLock)
-                {
-                    process = _currentProcesses.Find(p => p.ProcessId == processId);
-                }
-            }
-            return process;
         }
 
         public void ComputeStartingPlayers()

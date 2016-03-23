@@ -83,7 +83,7 @@ namespace CommSub.Conversations.InitiatorConversations
 
             if (Error != null)
             {
-                Process.RecordError(Error);
+                Process.ErrorHistory.Add(Error);
                 Logger.Warn(Error.Message);
             }
 
@@ -104,7 +104,7 @@ namespace CommSub.Conversations.InitiatorConversations
 
             int retries = MaxRetries;
 
-            while (retries > 0 && !Process.Quit)
+            while (retries > 0 && Process.MyProcessInfo.Status!=ProcessInfo.StatusCode.Terminating)
             {
                 Logger.DebugFormat("Send envelope with a {0} to {1}", envelope.Message.GetType().Name, envelope.IPEndPoint);
                 if (MyCommunicator.Send(envelope))
@@ -161,7 +161,7 @@ namespace CommSub.Conversations.InitiatorConversations
                 else
                 {
                     string errorMessage = string.Format("{0} failed because {1}", GetType().Name, (reply == null) ? string.Empty : reply.Note);
-                    Process.RecordError(new Error() { Message = errorMessage });
+                    Process.ErrorHistory.Add(new Error() { Message = errorMessage });
                     Logger.Warn(errorMessage);
                     PostFailureAction();
                 }
@@ -170,7 +170,7 @@ namespace CommSub.Conversations.InitiatorConversations
             else
             {
                 string errorMessage = string.Format("{0} is an invalid reply for a {1}", replyEnvelope.Message.GetType().Name, GetType().Name);
-                Process.RecordError(new Error() { Message = errorMessage });
+                Process.ErrorHistory.Add(new Error() { Message = errorMessage });
                 Logger.Warn(errorMessage);
             }
 

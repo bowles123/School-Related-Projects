@@ -21,10 +21,19 @@ namespace CommSub
             {
                 Envelope e = CommSubsystem.Communicator.Receive(TimeoutMs);
                 if (e != null && e.Message!=null)
-                {
-                    Logger.DebugFormat("Received message: Type={0}, From={1}", e.Message.GetType().Name, e.IPEndPoint);
-                    EnqueueEnvelope(e);
-                }
+               {
+                    if (e.Message.MsgId==null)
+                        CommSubsystem.ParentProcess.ErrorHistory.Add(Error.Get(Error.StandardErrorNumbers.NullMessageNumber));
+                    else if (e.Message.ConvId == null)
+                        CommSubsystem.ParentProcess.ErrorHistory.Add(
+                            Error.Get(Error.StandardErrorNumbers.NullConversationId));
+                    else
+                    {
+                        Logger.DebugFormat("Received message: Type={0}, From={1}", e.Message.GetType().Name,
+                            e.IPEndPoint);
+                        EnqueueEnvelope(e);
+                    }
+               }
             }
         }
 
@@ -53,7 +62,7 @@ namespace CommSub
         {
             Conversation conversation = CommSubsystem.ConversationFactory.CreateFromMessageType(messageType, incomingRequestEnvelope);
             if (conversation == null)
-                Logger.WarnFormat("Cannot find strategy for {0}", incomingRequestEnvelope.Message.GetType().Name);
+                Logger.WarnFormat("Cannot find strategy for {0}", messageType);
             else
             {
                 Logger.DebugFormat("Dispatch request to strategy, type={0}, message from={1}", conversation.GetType().Name, incomingRequestEnvelope.IPEndPoint);

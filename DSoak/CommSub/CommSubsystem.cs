@@ -4,6 +4,7 @@ namespace CommSub
     public class CommSubsystem
     {
         // A CommSubsystem is a facade that encapsulates the following objects.
+        private CommProcess _parentProcess;
         private EnvelopeQueueDictionary _queueDictionary;
         private Communicator _myCommunicator;
         private Dispatcher _myDispatcher;
@@ -16,6 +17,7 @@ namespace CommSub
 
         // The following properties are conveniences for working with the ComSubsystem.
         // They are part of the abstraction that this facade provides
+        public CommProcess ParentProcess { get { return _parentProcess;  } }
         public EnvelopeQueueDictionary QueueDictionary { get { return _queueDictionary; } }
         public Communicator Communicator { get { return _myCommunicator; } }
         public Dispatcher Dispatcher { get { return _myDispatcher; } }
@@ -26,8 +28,9 @@ namespace CommSub
         /// This methods setup up all of the components in a CommSubsystem.  Call this method
         /// sometime after setting the MinPort, MaxPort, and ConversationFactory
         /// </summary>
-        public void Initialize()
+        public void Initialize(CommProcess process)
         {
+            _parentProcess = process;
             _queueDictionary = new EnvelopeQueueDictionary();
             
             ConversationFactory.Initialize();

@@ -16,6 +16,7 @@ namespace CommSub
 
         private readonly Dictionary<Int32, GameProcessData> _processes = new Dictionary<Int32, GameProcessData>();
         private readonly object _myLock = new object();
+        private bool _isDirty;
         #endregion
 
         public void Clear()
@@ -37,6 +38,7 @@ namespace CommSub
                     foreach (GameProcessData process in currentProcesses)
                         AddOrUpdate(process);
                 }
+                _isDirty = true;
             }
         }
 
@@ -59,6 +61,7 @@ namespace CommSub
                     else
                         _processes[id] = processInfo;
 
+                    _isDirty = true;
                 }
             }
             return error;
@@ -78,6 +81,7 @@ namespace CommSub
                     {
                         string ep = _processes[processId].ToString();
                         _processes.Remove(processId);
+                        _isDirty = true;
                     }
                     else if (errorIfUnknown)
                         error = Error.Get(Error.StandardErrorNumbers.UnknownProcessId);
@@ -135,6 +139,11 @@ namespace CommSub
                 while (iterator.MoveNext())
                     Logger.DebugFormat("{0,10} {1}", iterator.Current.Key, iterator.Current.Value);
             }
+        }
+        public bool IsDirty { get { return _isDirty; } }
+        public void ClearDirtyFlag()
+        {
+            _isDirty = false;
         }
 
     }
