@@ -33,8 +33,11 @@ namespace CommSub.Conversations.ResponderConversations
         /// <param name="context"></param>
         public override void Execute(object context = null)
         {
-            Done = false;
             Logger.DebugFormat("Start {0} Conversation", GetType().Name);
+            Done = false;
+
+            if (PreExecuteAction != null)
+                PreExecuteAction(context);
 
             if (IsEnvelopeValid(IncomingEnvelope, AllowedTypes))
             {
@@ -90,6 +93,10 @@ namespace CommSub.Conversations.ResponderConversations
             }
 
             Done = true;
+
+            if (PostExecuteAction != null)
+                PostExecuteAction(context);
+
             Logger.DebugFormat("End {0}", GetType().Name);
         }
 

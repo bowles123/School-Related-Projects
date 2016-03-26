@@ -44,6 +44,9 @@ namespace CommSub.Conversations.InitiatorConversations
             Logger.DebugFormat("In Execute for {0}", GetType().Name);
             Done = false;
 
+            if (PreExecuteAction != null)
+                PreExecuteAction(context);
+
             if (IsConversationStateValid())
             {
                 if (IsProcessStateValid())
@@ -88,6 +91,10 @@ namespace CommSub.Conversations.InitiatorConversations
             }
 
             Done = true;
+
+            if (PostExecuteAction != null)
+                PostExecuteAction(context);
+
             Logger.DebugFormat("End {0} Conversation", GetType().Name);
         }
 

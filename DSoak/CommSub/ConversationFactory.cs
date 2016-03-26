@@ -11,6 +11,9 @@ namespace CommSub
         public int DefaultMaxRetries { get; set; }
         public int DefaultTimeout { get; set; }
 
+        public Conversation.ActionHandler PreExecuteAction { get; set; }
+        public Conversation.ActionHandler PostExecuteAction { get; set; }
+
         public bool IncomingMessageCanStartConversation(Type messageType)
         {
             return _typeMappings.ContainsKey(messageType);
@@ -31,7 +34,9 @@ namespace CommSub
                 Process = Process,
                 MaxRetries = DefaultMaxRetries,
                 Timeout = DefaultTimeout,
-                IncomingEnvelope = envelope
+                IncomingEnvelope = envelope,
+                PreExecuteAction = PreExecuteAction,
+                PostExecuteAction = PostExecuteAction
             };
             return conversation;
         }
@@ -56,6 +61,8 @@ namespace CommSub
                     conversation.MaxRetries = DefaultMaxRetries;
                     conversation.Timeout = DefaultTimeout;
                     conversation.IncomingEnvelope = envelope;
+                    conversation.PreExecuteAction = PreExecuteAction;
+                    conversation.PostExecuteAction = PostExecuteAction;
                 }
             }
             return conversation;

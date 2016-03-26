@@ -19,6 +19,9 @@ namespace CommSub.Conversations.InitiatorConversations
             Logger.Debug("In Execute");
             Done = false;
 
+            if (PreExecuteAction != null)
+                PreExecuteAction(context);
+
             if (IsConversationStateValid())
             {
                 if (IsProcessStateValid())
@@ -47,6 +50,10 @@ namespace CommSub.Conversations.InitiatorConversations
             }
 
             Done = true;
+
+            if (PostExecuteAction != null)
+                PostExecuteAction(context);
+
             Logger.DebugFormat("End {0}", GetType().Name);
         }
 

@@ -29,18 +29,50 @@ namespace CommSub
         #region Public Properties and Methods
         public delegate void CallbackWithRegistryEntries(List<ProcessInfo> data);
         public delegate void CallbackWithGameInfo(List<GameInfo> data);
+        public delegate void ActionHandler(object context);
+
+        public ActionHandler PreExecuteAction { get; set; }
+        public ActionHandler PostExecuteAction { get; set; }
+
 
         /// <summary>
         /// This in the process in which the conversation is taking place.
         /// </summary>
         public CommProcess Process { get; set; }
-
-        public CommSubsystem CommSubsystem { get { return (Process==null) ? null : Process.CommSubsystem; } }
+        
+        /// <summary>
+        /// This is the process's communication subsystem
+        /// </summary>
+        public CommSubsystem CommSubsystem { get { return (Process == null) ? null : Process.CommSubsystem; } }
+        
+        /// <summary>
+        /// This is the communication subsystem's communicator
+        /// </summary>
         public Communicator MyCommunicator { get { return (CommSubsystem == null) ? null : CommSubsystem.Communicator; } }
+        
+        /// <summary>
+        /// For conversations started by an incoming message, this is the message
+        /// </summary>
         public Envelope IncomingEnvelope { get; set; }
+        
+        /// <summary>
+        /// For conversations that will have a timeout, this is the timeout value in milliseconds
+        /// </summary>
         public int Timeout { get; set; }
+        
+        /// <summary>
+        /// For conversation that can resend and retry the waiting for a reply, this is the maximum number of retries
+        /// </summary>
         public int MaxRetries { get; set; }
+        
+        /// <summary>
+        /// This is set to true when the conversation finishes
+        /// </summary>
         public bool Done { get; set; }
+
+        /// <summary>
+        /// This hold an error, if the conversation resulted in an error
+        /// </summary>
         public Error ConvError { get { return Error; } }
 
         public void Launch(object context = null)
