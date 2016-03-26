@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using CommSub;
+using CommSubTesting.Conversations.ResponderConversations;
 using Messages.RequestMessages;
 using Messages.ReplyMessages;
 using SharedObjects;
@@ -37,7 +38,7 @@ namespace CommSubTesting
 
             // Check initial state
             Assert.AreEqual(0, commSubsystem.QueueDictionary.ConversationQueueCount);
-            Assert.AreEqual(0, DummyConversation.CreatedInstances.Count);
+            Assert.AreEqual(0, DummyAliveConversation.CreatedInstances.Count);
 
             // Case 1 - Send a request message that is acceptable and will create a
             //          new conversation
@@ -53,8 +54,8 @@ namespace CommSubTesting
 
             Thread.Sleep(3000);
 
-            Assert.AreEqual(1, DummyConversation.CreatedInstances.Count);
-            Assert.IsTrue(DummyConversation.LastCreatedInstance.ExecuteWasCalled);
+            Assert.AreEqual(1, DummyAliveConversation.CreatedInstances.Count);
+            Assert.IsTrue(DummyAliveConversation.LastCreatedInstance.ExecuteWasCalled);
 
             // Case 2 - Send a message as part of an existing conversation
 
@@ -85,7 +86,7 @@ namespace CommSubTesting
 
             Thread.Sleep(3000);
 
-            Assert.AreEqual(1, DummyConversation.CreatedInstances.Count);
+            Assert.AreEqual(1, DummyAliveConversation.CreatedInstances.Count);
         }
 
 

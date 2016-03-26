@@ -54,8 +54,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="DummyConversation.cs" />
+    <Compile Include="Conversations\InitiatorConversations\SimpleRequestReply.cs" />
+    <Compile Include="Conversations\ResponderConversations\SimpleRequestReply.cs" />
+    <Compile Include="DummyCommProcess.cs" />
+    <Compile Include="Conversations\ResponderConversations\DummyAliveConversation.cs" />
     <Compile Include="DummyConversationFactory.cs" />
+    <Compile Include="DummyRequest.cs" />
     <Compile Include="DummyRuntimeOptions.cs" />
     <Compile Include="EnvelopeQueueDictionaryTester.cs" />
     <Compile Include="EnvelopeTester.cs" />
@@ -68,6 +72,7 @@
     <Compile Include="KnownGameProcessesTester.cs" />
     <Compile Include="ErrorListTester.cs" />
     <Compile Include="CommProcessTester.cs" />
+    <Compile Include="RequestReplyTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CommSub\CommSub.csproj">
@@ -92,6 +97,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

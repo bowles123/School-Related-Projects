@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using CommSub;
+using CommSubTesting.Conversations.ResponderConversations;
 using Messages.RequestMessages;
 
 namespace CommSubTesting
@@ -17,7 +18,8 @@ namespace CommSubTesting
             // A real concrete ConversationFactory would be defined
             // in the application layer and would probably contain
             // multiple mappings.
-            Add(typeof(AliveRequest), typeof(DummyConversation));
+            Add(typeof(AliveRequest), typeof(DummyAliveConversation));
+            Add(typeof(DummyRequest), typeof(SimpleRequestReply));
         }
     }
 }

@@ -2,7 +2,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using CommSub;
-using log4net;
 using SharedObjects;
 
 namespace CommSubTesting
@@ -18,6 +17,7 @@ namespace CommSubTesting
 
             DummyCommProcess p = new DummyCommProcess()
             {
+                AssignedProcessId = 1,
                 RegistryEndPoint = new PublicEndPoint() {HostAndPort = "10.12.14.16:12001"}
             };
             Assert.AreEqual("10.12.14.16:12001", p.RegistryEndPoint.ToString());
@@ -63,19 +63,12 @@ namespace CommSubTesting
         [TestMethod]
         public void CommProcess_TestSetupStartingStopping()
         {
-            RuntimeOptions options = new DummyRuntimeOptions();
-            options.SetDefaults();
-
-            DummyCommProcess p = new DummyCommProcess()
-            {
-                Options = options
-            };
+            DummyCommProcess p = TestUtilities.SetupDummyCommProcess(1, null, null);
 
             p.SetupCommSubsystem(new DummyConversationFactory());
             Assert.IsNotNull(p.CommSubsystem);
             Assert.IsNotNull(p.MyDispatcher);
             Assert.IsNotNull(p.MyCommunicator);
-            Assert.IsTrue(p.MyCommunicator.Port>=options.MinPort && p.MyCommunicator.Port<=options.MaxPort);
 
             p.RegistryEndPoint = new PublicEndPoint() { HostAndPort = "127.0.0.1:12001" };
             p.MyProcessInfo = new ProcessInfo()
@@ -122,35 +115,4 @@ namespace CommSubTesting
 
     }
 
-    public class DummyCommProcess : CommProcess
-    {
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(DummyCommProcess));
-
-        protected override void Process(object state)
-        {
-            while (KeepGoing && MyProcessInfo.Status != ProcessInfo.StatusCode.Terminating)
-            {
-                Logger.Info("Processing...");
-                ProcessLoopCount++;
-                Thread.Sleep(100);
-            }
-
-            Stop();
-        }
-
-
-        protected override void CleanupProcess()
-        {
-            CleanupProcessCalled = true;
-        }
-
-        public override void CleanupSession()
-        {
-            CleanupSessionCalled = true;
-        }
-
-        public int ProcessLoopCount { get; set; }
-        public bool CleanupProcessCalled { get; set; }
-        public bool CleanupSessionCalled { get; set; }
-    }
 }
