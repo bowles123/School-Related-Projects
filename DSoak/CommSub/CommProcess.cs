@@ -35,6 +35,7 @@ namespace CommSub
         #region Communication Subsystem Accessors
         public PublicEndPoint RegistryEndPoint { get; set; }
         public PublicEndPoint ProxyEndPoint { get; set; }
+        public PublicEndPoint PennyBankEndPoint { get; set; }
         public CommSubsystem CommSubsystem { get; protected set; }
         public Communicator MyCommunicator { get { return (CommSubsystem==null) ? null : CommSubsystem.Communicator; } }
         public Dispatcher MyDispatcher { get { return (CommSubsystem==null) ? null : CommSubsystem.Dispatcher; } }
