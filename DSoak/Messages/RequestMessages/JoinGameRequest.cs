@@ -11,6 +11,6 @@ namespace Messages.RequestMessages
         public int GameId { get; set; }
 
         [DataMember]
-        public ProcessInfo Player { get; set; }
+        public ProcessInfo Process { get; set; }
     }
 }
