@@ -5,7 +5,9 @@ namespace SharedObjects
 {
     public class ResourceSet<T> where T : SharedResource
     {
-        private readonly Dictionary<int, T> _availableSet = new Dictionary<int, T>();
+        private readonly Dictionary<int, T> _resources = new Dictionary<int, T>(); 
+        private readonly List<int> _available = new List<int>();
+        private readonly List<int> _reserved = new List<int>();
         private readonly List<int> _used = new List<int>(); 
         private readonly object _myLock = new object();
 
@@ -13,7 +15,9 @@ namespace SharedObjects
         {
             lock (_myLock)
             {
-                _availableSet.Clear();
+                _resources.Clear();
+                _reserved.Clear();
+                _available.Clear();
                 _used.Clear();
             }
         }
@@ -25,7 +29,7 @@ namespace SharedObjects
                 int result;
                 lock (_myLock)
                 {
-                    result = _availableSet.Count;
+                    result = _available.Count;
                 }
                 return result;
             }
@@ -50,10 +54,13 @@ namespace SharedObjects
             {
                 lock (_myLock)
                 {
-                    if (_availableSet.ContainsKey(sharedResource.Id))
-                        _availableSet[sharedResource.Id] = sharedResource;
+                    if (_resources.ContainsKey(sharedResource.Id))
+                        _resources[sharedResource.Id] = sharedResource;
                     else
-                        _availableSet.Add(sharedResource.Id, sharedResource);                   
+                    {
+                        _resources.Add(sharedResource.Id, sharedResource);
+                        _available.Add(sharedResource.Id);
+                    }
                 }
             }
         }
@@ -63,8 +70,8 @@ namespace SharedObjects
             T result = null;
             lock (_myLock)
             {
-                if (_availableSet.ContainsKey(id))
-                    result = _availableSet[id];
+                if (_resources.ContainsKey(id))
+                    result = _resources[id];
             }
             return result;
         }
@@ -74,32 +81,65 @@ namespace SharedObjects
             T result = null;
             lock (_myLock)
             {
-                if (_availableSet.Count > 0)
-                    result = _availableSet.First().Value;
+                if (_available.Count > 0)
+                    result = _resources[_available[0]];
             }
             return result;
+        }
+
+        public T ReserveOne()
+        {
+            T result = null;
+            lock (_myLock)
+            {
+                if (_available.Count > 0)
+                {
+                    result = _resources[_available[0]];
+                    _available.RemoveAt(0);
+                    _reserved.Add(result.Id);
+                }
+            }
+            return result;
+            
+        }
+
+        public void Unreserve(int id)
+        {
+            lock (_myLock)
+            {
+                if (_reserved.Contains(id))
+                {
+                    _reserved.Remove(id);
+                    _available.Add(id);
+                }
+            }
         }
 
         public void MarkAsUsed(int id)
         {
             lock (_myLock)
             {
-                if (_availableSet.ContainsKey(id))
-                    _availableSet.Remove(id);
+                if (_reserved.Contains(id))
+                    _reserved.Remove(id);
+                else if (_available.Contains(id))
+                    _available.Remove(id);
 
                 if (!_used.Contains(id))
                     _used.Add(id);
             }
         }
 
-        public bool ContainsAny(Penny[] pennies)
+        public bool AreAllAvailable(Penny[] pennies)
         {
             bool result;
             lock (_myLock)
             {
                 result = true;
-                if (pennies != null && pennies.Any(p => _availableSet.ContainsKey(p.Id)))
-                    result = false;
+                if (pennies != null && pennies.Length > 0)
+                {
+                    if (!pennies.All(p => _available.Contains(p.Id)))
+                        result = false;
+                }
             }
             return result;
         }

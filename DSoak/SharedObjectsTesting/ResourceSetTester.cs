@@ -62,6 +62,35 @@ namespace SharedObjectsTesting
             s.Clear();
             Assert.AreEqual(0, s.AvailableCount);
             Assert.AreEqual(0, s.UsedCount);
+
+            // Test reserving and unreserving
+            s.AddOrUpdate(p1);
+            s.AddOrUpdate(p2);
+            s.AddOrUpdate(p3);
+            Assert.AreEqual(3, s.AvailableCount);
+            Assert.AreEqual(0, s.UsedCount);
+
+            Penny p10 = s.ReserveOne();
+            Assert.AreEqual(2, s.AvailableCount);
+            Assert.AreEqual(0, s.UsedCount);
+
+            Penny p20 = s.ReserveOne();
+            Assert.AreNotSame(p10, p20);
+            Assert.AreEqual(1, s.AvailableCount);
+            Assert.AreEqual(0, s.UsedCount);
+
+            s.Unreserve(p10.Id);
+            Assert.AreEqual(2, s.AvailableCount);
+            Assert.AreEqual(0, s.UsedCount);
+
+            s.Unreserve(p10.Id);
+            Assert.AreEqual(2, s.AvailableCount);
+            Assert.AreEqual(0, s.UsedCount);
+
+            s.MarkAsUsed(p20.Id);
+            Assert.AreEqual(2, s.AvailableCount);
+            Assert.AreEqual(1, s.UsedCount);
+
         }
     }
 }
