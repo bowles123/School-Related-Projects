@@ -63,10 +63,13 @@ namespace CommSub.Conversations.InitiatorConversations
             message.InitMessageAndConversationNumbers();
             Envelope env = new Envelope() {Message = message};
 
-            foreach (PublicEndPoint ep in TargetEndPoints)
+            if (TargetEndPoints != null && TargetEndPoints.Count > 0 && MyCommunicator!=null)
             {
-                env.EndPoint = ep;
-                MyCommunicator.Send(env);
+                foreach (PublicEndPoint ep in TargetEndPoints)
+                {
+                    env.EndPoint = ep;
+                    MyCommunicator.Send(env);
+                }
             }
         }
 

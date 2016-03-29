@@ -111,7 +111,7 @@ namespace CommSub.Conversations.InitiatorConversations
 
             int retries = MaxRetries;
 
-            while (retries > 0 && Process.MyProcessInfo.Status!=ProcessInfo.StatusCode.Terminating)
+            while (retries > 0 && Process.MyProcessInfo.Status!=ProcessInfo.StatusCode.Terminating && MyCommunicator!=null)
             {
                 Logger.DebugFormat("Send envelope with a {0} to {1}", envelope.Message.GetType().Name, envelope.IPEndPoint);
                 if (MyCommunicator.Send(envelope))
@@ -138,6 +138,7 @@ namespace CommSub.Conversations.InitiatorConversations
                     retries = 0;
                 }
             }
+
             if (retries == 0)
                 PostFailureAction();
 
