@@ -36,7 +36,7 @@ namespace MessageTesting
                                     MsgId = msgNr,
                                     ConvId = msgNr.Clone(),
                                     ProcessType = ProcessInfo.ProcessType.Player,
-                                    ProcessLabel = "Test Player",
+                                    ProcessLabel = "Test Process",
                                     Identity = i1
                                 };
             Assert.AreSame(msgNr, r2.MsgId);
@@ -44,7 +44,7 @@ namespace MessageTesting
             Assert.AreEqual(msgNr.Pid, r2.MsgId.Pid);
             Assert.AreEqual(msgNr.Seq, r2.MsgId.Seq);
             Assert.AreEqual(ProcessInfo.ProcessType.Player, r2.ProcessType);
-            Assert.AreEqual("Test Player", r2.ProcessLabel);
+            Assert.AreEqual("Test Process", r2.ProcessLabel);
             Assert.IsNotNull(r2.Identity);
             Assert.AreEqual("2375423", r2.Identity.ANumber);
             Assert.AreEqual("Tom", r2.Identity.FirstName);

@@ -13,10 +13,10 @@ namespace MessageTesting.RequestMessages
         [TestMethod]
         public void JoinGameRequest_TestEverything()
         {
-            JoinGameRequest r1 = new JoinGameRequest() { GameId = 10, Player = new ProcessInfo() { ProcessId = 11 }};
+            JoinGameRequest r1 = new JoinGameRequest() { GameId = 10, Process = new ProcessInfo() { ProcessId = 11 }};
             Assert.IsNotNull(r1);
             Assert.AreEqual(10, r1.GameId);
-            Assert.AreEqual(11, r1.Player.ProcessId);
+            Assert.AreEqual(11, r1.Process.ProcessId);
 
             byte[] bytes = r1.Encode();
 
@@ -26,7 +26,7 @@ namespace MessageTesting.RequestMessages
             JoinGameRequest r2 = m2 as JoinGameRequest;
             Assert.IsNotNull(r2);
             Assert.AreEqual(r1.GameId, r2.GameId);
-            Assert.AreEqual(r1.Player.ProcessId, r2.Player.ProcessId);
+            Assert.AreEqual(r1.Process.ProcessId, r2.Process.ProcessId);
         }
     }
 }
