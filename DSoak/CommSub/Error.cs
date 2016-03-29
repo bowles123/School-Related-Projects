@@ -107,7 +107,7 @@ namespace CommSub
             Add(StandardErrorNumbers.JoinRequestIsOnlyValidForAvailableGames, "Join request is only valid for AVAILABLE games -- try joining another game");
             Add(StandardErrorNumbers.JoinRequestIsIncomplete, "Join request is incomplete -- check request for missing information like A# or names");
             Add(StandardErrorNumbers.ProcessCannotBeAddedToGame, "Process cannot be added to game -- look at GameServer log for more details");
-            Add(StandardErrorNumbers.PlayerInformationCannotBeNull, "Player information cannot be null");
+            Add(StandardErrorNumbers.PlayerInformationCannotBeNull, "Process information cannot be null");
             Add(StandardErrorNumbers.CannotValidateProcess, "Cannot validate process");
 
             // Get-resouce related protocols
