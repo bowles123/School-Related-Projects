@@ -103,6 +103,35 @@ namespace SharedObjects
             
         }
 
+        public T[] ReserveMany(int n)
+        {
+            T[] result = null;
+            lock (_myLock)
+            {
+                if (n>0 && _available.Count >= n)
+                {
+                    result = new T[n];
+                    for (int i = 0; i < n; i++)
+                    {
+                        result[i] = _resources[_available[0]];
+                        _available.RemoveAt(0);
+                        _reserved.Add(result[i].Id);
+                    }
+                }
+            }
+            return result;
+
+        }
+
+        public void Unreserve(int[] ids)
+        {
+            if (ids != null && ids.Length > 0)
+            {
+                foreach (int id in ids)
+                    Unreserve(id);
+            }
+        }
+
         public void Unreserve(int id)
         {
             lock (_myLock)
@@ -112,6 +141,15 @@ namespace SharedObjects
                     _reserved.Remove(id);
                     _available.Add(id);
                 }
+            }
+        }
+
+        public void MarkAsUsed(int[] ids)
+        {
+            if (ids != null && ids.Length > 0)
+            {
+                foreach (int id in ids)
+                    MarkAsUsed(id);
             }
         }
 

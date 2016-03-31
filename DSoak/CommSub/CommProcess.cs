@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ServiceModel.Security;
+using System.Threading;
 
 using log4net;
 
@@ -53,6 +54,7 @@ namespace CommSub
         public override void Stop()
         {
             Logger.DebugFormat("Entering Stop, with Status={0}", (MyProcessInfo==null) ? "null" : MyProcessInfo.Status.ToString());
+
             if (MyProcessInfo!=null)
                 MyProcessInfo.Status = ProcessInfo.StatusCode.Terminating;
 

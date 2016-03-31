@@ -51,7 +51,7 @@ namespace CommSub
         [Option("label", MetaValue = "STRING", Required = false, HelpText = "Process label")]
         public string Label { get; set; }
 
-        [Option("aname", MetaValue = "STRING", Required = false, HelpText = "End-user's A#")]
+        [Option("anumber", MetaValue = "STRING", Required = false, HelpText = "End-user's A#")]
         public string ANumber { get; set; }
 
         [Option("firstname", MetaValue = "STRING", Required = false, HelpText = "End-user's first name")]

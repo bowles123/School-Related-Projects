@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommSub", "CommSub\CommSub.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommSubTesting", "CommSubTesting\CommSubTesting.csproj", "{6EF35C2E-F9E9-458B-9F19-B690A0C8C9DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilsTesting", "UtilsTesting\UtilsTesting.csproj", "{8E165CFE-1FF6-4EB4-BAE6-973427F02123}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{6EF35C2E-F9E9-458B-9F19-B690A0C8C9DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EF35C2E-F9E9-458B-9F19-B690A0C8C9DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EF35C2E-F9E9-458B-9F19-B690A0C8C9DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E165CFE-1FF6-4EB4-BAE6-973427F02123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E165CFE-1FF6-4EB4-BAE6-973427F02123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E165CFE-1FF6-4EB4-BAE6-973427F02123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E165CFE-1FF6-4EB4-BAE6-973427F02123}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

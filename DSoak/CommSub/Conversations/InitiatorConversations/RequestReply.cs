@@ -76,7 +76,7 @@ namespace CommSub.Conversations.InitiatorConversations
                         ReliableSend(env);
                     }
                     else
-                        Error = new Error() {Message = "No request message created"};
+                        Logger.Warn("No request message created");
                 }
                 else
                     Error = Error.Get(Error.StandardErrorNumbers.InvalidProcessStateForConversation);
