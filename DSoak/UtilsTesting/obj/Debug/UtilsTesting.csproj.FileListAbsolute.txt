@@ -6,11 +6,3 @@ Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\UtilsTesting\bin\Debug\Utils.pdb
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\UtilsTesting\obj\Debug\UtilsTesting.csprojResolveAssemblyReference.cache
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\UtilsTesting\obj\Debug\UtilsTesting.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\UtilsTesting\obj\Debug\UtilsTesting.pdb
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\UtilsTesting\bin\Debug\UtilsTesting.dll
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\UtilsTesting\bin\Debug\UtilsTesting.pdb
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\UtilsTesting\bin\Debug\Utils.dll
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\UtilsTesting\bin\Debug\log4net.dll
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\UtilsTesting\bin\Debug\Utils.pdb
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\UtilsTesting\obj\Debug\UtilsTesting.csprojResolveAssemblyReference.cache
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\UtilsTesting\obj\Debug\UtilsTesting.dll
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\UtilsTesting\obj\Debug\UtilsTesting.pdb

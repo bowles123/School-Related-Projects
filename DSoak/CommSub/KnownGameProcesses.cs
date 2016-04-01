@@ -69,6 +69,7 @@ namespace CommSub
 
         public Error Remove(Int32 processId, bool errorIfUnknown = true)
         {
+            Logger.DebugFormat("Enter Remove, with processId={0} and errorIfUnknown={1}", processId, errorIfUnknown);
             Error error = null;
             if (processId < 0)
                 error = Error.Get(Error.StandardErrorNumbers.InvalidProcessId);

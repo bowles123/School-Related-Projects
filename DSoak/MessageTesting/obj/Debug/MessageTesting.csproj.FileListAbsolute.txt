@@ -38,13 +38,3 @@ Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\bin\Debug\SharedOb
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\obj\Debug\MessageTesting.csprojResolveAssemblyReference.cache
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\obj\Debug\MessageTesting.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\obj\Debug\MessageTesting.pdb
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\MessageTesting\bin\Debug\MessageTesting.dll
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\MessageTesting\bin\Debug\MessageTesting.pdb
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\MessageTesting\bin\Debug\Messages.dll
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\MessageTesting\bin\Debug\SharedObjects.dll
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\MessageTesting\bin\Debug\log4net.dll
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\MessageTesting\bin\Debug\Messages.pdb
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\MessageTesting\bin\Debug\SharedObjects.pdb
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\MessageTesting\obj\Debug\MessageTesting.csprojResolveAssemblyReference.cache
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\MessageTesting\obj\Debug\MessageTesting.dll
-Y:\Dropbox\UnderGit\cs5200s16-shared\DSoak\MessageTesting\obj\Debug\MessageTesting.pdb
