@@ -44,9 +44,9 @@ namespace CommSub
 
 
         #region Constructors, Initializers, Destructors
-        public virtual void SetupCommSubsystem(ConversationFactory conversationFactory)
+        public virtual void SetupCommSubsystem(ConversationFactory conversationFactory, int minPort=12000, int maxPort=12999)
         {
-            CommSubsystem = new CommSubsystem() { ConversationFactory = conversationFactory, MaxPort = Options.MaxPort, MinPort = Options.MinPort };
+            CommSubsystem = new CommSubsystem() { ConversationFactory = conversationFactory, MaxPort = maxPort, MinPort = minPort };
             CommSubsystem.Initialize(this);
             CommSubsystem.Start();
         }
@@ -77,6 +77,9 @@ namespace CommSub
         {
             if (MyProcessInfo!=null)
                 MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
+
+            if (ErrorHistory!=null)
+                ErrorHistory.Clear();
         }
 
         #endregion
@@ -124,7 +127,10 @@ namespace CommSub
         /// This method is not automatically by anything in this base classes.  Specializations or
         /// conversations should call it as needed.
         /// </summary>
-        public virtual void CleanupSession() { }
+        public virtual void CleanupSession()
+        {
+            MyProcessInfo.Status = ProcessInfo.StatusCode.Pausing;
+        }
 
         #endregion
 
