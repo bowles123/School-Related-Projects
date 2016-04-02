@@ -27,12 +27,13 @@ namespace Messages
             Register(typeof(Reply));
             Register(typeof(StartGame));
 
-            Register(typeof (AliveRequest));
+            Register(typeof(AliveRequest));
             Register(typeof(AllowanceAllocationRequest));
             Register(typeof(AllowanceDeliveryRequest));
             Register(typeof(AuctionAnnouncement));
             Register(typeof(BuyBalloonRequest));
             Register(typeof(DeadProcessNotification));
+            Register(typeof(ExitGameRequest));
             Register(typeof(FillBalloonRequest));
             Register(typeof(GameListRequest));
             Register(typeof(GameStatusNotification));

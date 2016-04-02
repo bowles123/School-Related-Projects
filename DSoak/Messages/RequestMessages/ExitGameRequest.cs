@@ -3,7 +3,9 @@
 namespace Messages.RequestMessages
 {
     [DataContract]
-    public class LeaveGameRequest : Request
+    public class ExitGameRequest : Request
     {
+        [DataMember]
+        public int GameId { get; set; }
     }
 }
