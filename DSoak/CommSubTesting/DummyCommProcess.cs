@@ -35,7 +35,7 @@ namespace CommSubTesting
                 DefaultTimeout = Options.Timeout
             };
 
-            SetupCommSubsystem(conversationFactory);
+            SetupCommSubsystem(conversationFactory, Options.MinPort, Options.MaxPort);
 
             MyProcessInfo.EndPoint = new PublicEndPoint() {Host = "127.0.0.1", Port = MyCommunicator.Port};
             Logger.DebugFormat("Process {0}'s End Point = {1}", MyProcessInfo.ProcessId, MyProcessInfo.EndPoint);
