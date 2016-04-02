@@ -52,6 +52,7 @@
     <Compile Include="RequestMessages\AllowanceAllocationRequest.cs" />
     <Compile Include="RequestMessages\AllowanceDeliveryRequest.cs" />
     <Compile Include="RequestMessages\AuctionAnnouncement.cs" />
+    <Compile Include="RequestMessages\ExitGameRequest.cs" />
     <Compile Include="RequestMessages\GameStatusNotification.cs" />
     <Compile Include="RequestMessages\GetKeyRequest.cs" />
     <Compile Include="RequestMessages\PennyValidation.cs" />
