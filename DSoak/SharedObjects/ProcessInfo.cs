@@ -8,10 +8,10 @@ namespace SharedObjects
     public class ProcessInfo
     {
         public enum ProcessType { Unknown = 0, Registry, GameManager, Player, BalloonStore, WaterServer, UmbrellaSupplier, PennyBank, Proxy };
-        public enum StatusCode { Unknown = 0, NotInitialized = 1, Initializing = 2, Registered = 3, JoiningGame = 4, JoinedGame = 5, Working = 6, PlayingGame = 7, HostingGame = 8, LeavingGame = 9, Won = 10, Lost = 11, Terminating = 12, Tied=13 };
+        public enum StatusCode { Unknown = 0, NotInitialized = 1, Initializing = 2, Registered = 3, JoiningGame = 4, JoinedGame = 5, Working = 6, PlayingGame = 7, HostingGame = 8, LeavingGame = 9, Won = 10, Lost = 11, Terminating = 12, Tied=13, Pausing=14 };
 
         private StatusCode status;
-        private static readonly string[] statusNames = new string[] { "Unknown", "Not Initialized", "Initializing", "Registered", "Joining Game", "Joined Game", "Working", "Playing Game", "Hosting Game", "Leaving Game", "Won Game", "Lost Game", "Terminating", "Tied in a Draw" };
+        private static readonly string[] statusNames = new string[] { "Unknown", "Not Initialized", "Initializing", "Registered", "Joining Game", "Joined Game", "Working", "Playing Game", "Hosting Game", "Leaving Game", "Won Game", "Lost Game", "Terminating", "Tied in a Draw", "Taking a break" };
         private object myLock = new object();
 
         [DataMember]
