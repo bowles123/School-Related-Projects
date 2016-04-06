@@ -30,5 +30,20 @@ namespace Utils
             result = (data == null) ? "null" : data.Aggregate(result, (current, b) => current + string.Format(" {0,3}", b.ToString("D3")));
             return result;
         }
+
+        public static string IntArrayToString(int[] values)
+        {
+            string result = string.Empty;
+            if (values != null && values.Length > 0)
+            {
+                foreach (int v in values)
+                {
+                    if (result != string.Empty)
+                        result += ", ";
+                    result += v.ToString();
+                }
+            }
+            return result;
+        }
     }
 }

@@ -77,9 +77,6 @@ namespace CommSub
         {
             if (MyProcessInfo!=null)
                 MyProcessInfo.Status = ProcessInfo.StatusCode.NotInitialized;
-
-            if (ErrorHistory!=null)
-                ErrorHistory.Clear();
         }
 
         #endregion
@@ -130,6 +127,9 @@ namespace CommSub
         public virtual void CleanupSession()
         {
             MyProcessInfo.Status = ProcessInfo.StatusCode.Pausing;
+
+            if (ErrorHistory != null)
+                ErrorHistory.Clear();
         }
 
         #endregion

@@ -18,4 +18,3 @@ Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjects\bin\Debug\SharedObj
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjects\bin\Debug\log4net.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjects\obj\Debug\SharedObjects.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjects\obj\Debug\SharedObjects.pdb
-Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjects\obj\Debug\SharedObjects.csprojResolveAssemblyReference.cache
