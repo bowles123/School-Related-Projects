@@ -114,7 +114,7 @@ namespace CommSub.Conversations.InitiatorConversations
             while (retries > 0 && Process.MyProcessInfo.Status!=ProcessInfo.StatusCode.Terminating && MyCommunicator!=null)
             {
                 Logger.DebugFormat("Send envelope with a {0} to {1}", envelope.Message.GetType().Name, envelope.IPEndPoint);
-                if (MyCommunicator.Send(envelope))
+                if (UnreliableSend(envelope))
                 {
                     Logger.DebugFormat("Try to get a response");
                     Envelope replyEnvelope = queue.Dequeue(Timeout);

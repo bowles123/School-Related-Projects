@@ -45,6 +45,7 @@ namespace CommSub
             ProcessCannotBeAddedToGame = 1205,
             PlayerInformationCannotBeNull=1206,
             CannotValidateProcess = 1207,
+            GameFull = 1208,
 
             InvalidResourceType = 1301,
 
@@ -109,6 +110,7 @@ namespace CommSub
             Add(StandardErrorNumbers.ProcessCannotBeAddedToGame, "Process cannot be added to game -- look at GameServer log for more details");
             Add(StandardErrorNumbers.PlayerInformationCannotBeNull, "Process information cannot be null");
             Add(StandardErrorNumbers.CannotValidateProcess, "Cannot validate process");
+            Add(StandardErrorNumbers.GameFull, "Game is full -- try joining a different game");
 
             // Get-resouce related protocols
             Add(StandardErrorNumbers.InvalidResourceType, "Invalid Resource Type -- be sure the resource type is one the receiver of your request can handle");

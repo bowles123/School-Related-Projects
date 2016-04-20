@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System.Security.Cryptography;
 using log4net;
 using SharedObjects;
 
@@ -15,6 +13,8 @@ namespace CommSub
         private static readonly ILog Logger = LogManager.GetLogger(typeof(KnownGameProcesses));
 
         private readonly Dictionary<Int32, GameProcessData> _processes = new Dictionary<Int32, GameProcessData>();
+        private readonly Dictionary<Int32, RSACryptoServiceProvider> _processRsaMappings = new Dictionary<Int32, RSACryptoServiceProvider>();
+
         private readonly object _myLock = new object();
         private bool _isDirty;
         #endregion
@@ -78,9 +78,11 @@ namespace CommSub
                 Logger.DebugFormat("Remove Id={0} from ProcessAddressBook", processId);
                 lock (_myLock)
                 {
+                    if (_processRsaMappings.ContainsKey(processId))
+                        _processRsaMappings.Remove(processId);
+
                     if (_processes.ContainsKey(processId))
                     {
-                        string ep = _processes[processId].ToString();
                         _processes.Remove(processId);
                         _isDirty = true;
                     }
@@ -130,6 +132,46 @@ namespace CommSub
                 return result;
             }
         }
+
+        public void AddPublicKey(int processId, PublicKey key)
+        {
+            if (key != null)
+            {
+                // Import the public key into a Cryptography Service Provider
+                RSAParameters rsaKeyInfo = new RSAParameters();
+                rsaKeyInfo.Modulus = key.Modulus;
+                rsaKeyInfo.Exponent = key.Exponent;
+
+                RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+                rsa.ImportParameters(rsaKeyInfo);
+
+                AddProcessRsa(processId, rsa);
+            }
+        }
+
+        public void AddProcessRsa(int processId, RSACryptoServiceProvider rsa)
+        {
+            if (rsa != null)
+            {
+                lock (_myLock)
+                {
+                    if (_processRsaMappings.ContainsKey(processId))
+                        _processRsaMappings[processId] = rsa;
+                    else
+                        _processRsaMappings.Add(processId, rsa);
+                }
+            }
+        }
+
+
+        public RSACryptoServiceProvider GetProcessRsa(int processId)
+        {
+            RSACryptoServiceProvider provider = null;
+            if (_processRsaMappings.ContainsKey(processId))
+                provider = _processRsaMappings[processId];
+            return provider;
+        }
+
 
         public void LogContents()
         {

@@ -80,7 +80,8 @@ namespace CommSub.Conversations.ResponderConversations
                         replyEnv.EndPoint = IncomingEnvelope.EndPoint;
                     }
 
-                    UnreliableSend(replyEnv);
+                    if (!UnreliableSend(replyEnv))
+                        Error = new Error() {Message = "Cannot send reply"};
 
                     Logger.DebugFormat("Replied with a {0}", reply.GetType().Name);
                 }

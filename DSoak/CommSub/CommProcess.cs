@@ -1,5 +1,4 @@
-﻿using System.ServiceModel.Security;
-using System.Threading;
+﻿using System.Threading;
 
 using log4net;
 
@@ -41,7 +40,6 @@ namespace CommSub
         public Communicator MyCommunicator { get { return (CommSubsystem==null) ? null : CommSubsystem.Communicator; } }
         public Dispatcher MyDispatcher { get { return (CommSubsystem==null) ? null : CommSubsystem.Dispatcher; } }
         #endregion
-
 
         #region Constructors, Initializers, Destructors
         public virtual void SetupCommSubsystem(ConversationFactory conversationFactory, int minPort=12000, int maxPort=12999)
@@ -97,9 +95,11 @@ namespace CommSub
 
         public void BeginShutdown()
         {
-            if (MyProcessInfo!=null)
+            if (MyProcessInfo != null)
+            {
                 MyProcessInfo.Status = ProcessInfo.StatusCode.Terminating;
-            RaiseShutdownEvent();
+                RaiseShutdownEvent();
+            }
         }
 
         public void WaitToCloseDown(int timeout)

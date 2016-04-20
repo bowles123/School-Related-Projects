@@ -43,14 +43,15 @@ namespace Messages
             Register(typeof(LeaveGameRequest));
             Register(typeof(LoginRequest));
             Register(typeof(LogoutRequest));
-            Register(typeof(LowerUmbrella));
+            Register(typeof(UmbrellaLoweredNotification));
             Register(typeof(NextIdRequest));
             Register(typeof(PennyValidation));
-            Register(typeof(RaiseUmbrella));
+            Register(typeof(RaiseUmbrellaRequest));
             Register(typeof(ReadyToStart));
             Register(typeof(RegisterGameRequest));
             Register(typeof(ShutdownRequest));
             Register(typeof(ThrowBalloonRequest));
+            Register(typeof(UsedPenniesNotification));
             Register(typeof(Routing));
         }
 

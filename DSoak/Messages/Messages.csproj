@@ -52,6 +52,7 @@
     <Compile Include="RequestMessages\AllowanceAllocationRequest.cs" />
     <Compile Include="RequestMessages\AllowanceDeliveryRequest.cs" />
     <Compile Include="RequestMessages\AuctionAnnouncement.cs" />
+    <Compile Include="RequestMessages\UsedPenniesNotification.cs" />
     <Compile Include="RequestMessages\ExitGameRequest.cs" />
     <Compile Include="RequestMessages\GameStatusNotification.cs" />
     <Compile Include="RequestMessages\GetKeyRequest.cs" />
@@ -65,8 +66,8 @@
     <Compile Include="RequestMessages\FillBalloonRequest.cs" />
     <Compile Include="RequestMessages\HitNotification.cs" />
     <Compile Include="RequestMessages\LeaveGameRequest.cs" />
-    <Compile Include="RequestMessages\LowerUmbrella.cs" />
-    <Compile Include="RequestMessages\RaiseUmbrella.cs" />
+    <Compile Include="RequestMessages\UmbrellaLoweredNotification.cs" />
+    <Compile Include="RequestMessages\RaiseUmbrellaRequest.cs" />
     <Compile Include="RequestMessages\ShutdownRequest.cs" />
     <Compile Include="RequestMessages\ThrowBalloonRequest.cs" />
     <Compile Include="ReplyMessages\JoinGameReply.cs" />

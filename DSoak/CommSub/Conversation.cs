@@ -6,7 +6,6 @@ using System.Threading;
 using SharedObjects;
 
 using log4net;
-using Messages;
 
 namespace CommSub
 {
@@ -128,10 +127,9 @@ namespace CommSub
             return true;
         }
 
-        protected void UnreliableSend(Envelope envelope)
+        protected bool UnreliableSend(Envelope envelope)
         {
-            if (MyCommunicator!=null && envelope!=null)
-                MyCommunicator.Send(envelope);
+            return (MyCommunicator != null && envelope != null) && MyCommunicator.Send(envelope);
         }
 
         #endregion

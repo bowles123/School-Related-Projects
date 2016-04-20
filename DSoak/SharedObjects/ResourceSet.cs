@@ -10,6 +10,7 @@ namespace SharedObjects
         private readonly List<int> _reserved = new List<int>();
         private readonly List<int> _used = new List<int>(); 
         private readonly object _myLock = new object();
+        private int _lastRecentlyUsedIndex;
 
         public void Clear()
         {
@@ -127,8 +128,11 @@ namespace SharedObjects
         {
             if (ids != null && ids.Length > 0)
             {
-                foreach (int id in ids)
-                    Unreserve(id);
+                lock (_myLock)
+                {
+                    foreach (int id in ids)
+                        Unreserve(id);
+                }
             }
         }
 
@@ -148,8 +152,11 @@ namespace SharedObjects
         {
             if (ids != null && ids.Length > 0)
             {
-                foreach (int id in ids)
-                    MarkAsUsed(id);
+                lock (_myLock)
+                {
+                    foreach (int id in ids)
+                        MarkAsUsed(id);
+                }
             }
         }
 
@@ -167,7 +174,7 @@ namespace SharedObjects
             }
         }
 
-        public bool AreAllAvailable(Penny[] pennies)
+        public bool AreAllAvailable(Penny[] pennies, bool markAsUsedIfValid)
         {
             bool result;
             lock (_myLock)
@@ -177,6 +184,9 @@ namespace SharedObjects
                 {
                     if (!pennies.All(p => _available.Contains(p.Id)))
                         result = false;
+
+                    if (result && markAsUsedIfValid)
+                        MarkAsUsed(pennies.Select(p => p.Id).ToArray());
                 }
             }
             return result;
@@ -187,10 +197,22 @@ namespace SharedObjects
             bool result = false;
             lock (_myLock)
             {
-                if (pennies != null && pennies.Any(p => _used.Contains(p.Id)))
+                if (pennies != null && pennies.Length>0 && pennies.Any(p => _used.Contains(p.Id)))
                     result = true;
             }
             return result;
+        }
+
+        public int[] GetRecentlyUsed()
+        {
+            int[] recentlyUsed;
+            lock (_myLock)
+            {
+                recentlyUsed = new int[_used.Count - _lastRecentlyUsedIndex];
+                _used.CopyTo(_lastRecentlyUsedIndex, recentlyUsed, 0, _used.Count - _lastRecentlyUsedIndex);
+                _lastRecentlyUsedIndex = _used.Count;
+            }
+            return recentlyUsed;
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Net.Configuration;
 using Utils;
 
 using log4net;
@@ -29,8 +29,9 @@ namespace CommSub
                             Error.Get(Error.StandardErrorNumbers.NullConversationId));
                     else
                     {
-                        Logger.DebugFormat("Received message: Type={0}, From={1}", e.Message.GetType().Name,
-                            e.IPEndPoint);
+                        Logger.DebugFormat("Received message: Type={0}, From Process={1}",
+                            e.ActualMessage.GetType().Name,
+                            e.ActualMessage.MsgId.Pid);
                         EnqueueEnvelope(e);
                     }
                }

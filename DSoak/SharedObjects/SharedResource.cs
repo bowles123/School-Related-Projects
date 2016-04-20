@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Text;
 using System.Runtime.Serialization;
 using System.Security.Cryptography;
@@ -8,25 +9,20 @@ namespace SharedObjects
     [DataContract]
     public abstract class SharedResource
     {
-        private static readonly SHA1Managed Hasher = new SHA1Managed();
 
         #region Public Methods
         [DataMember]
         public Int32 Id { get; set; }
 
         [DataMember]
+        public Int32 SignedBy { get; set; }
+
+        [DataMember]
         public byte[] DigitalSignature { get; set; }
 
-        public byte[] ComputeHash()
+        public virtual byte[] DataBytes()
         {
-            byte[] hash = Hasher.ComputeHash(Encoding.Unicode.GetBytes(ToString()));
-            return hash;
-        }
-
-        public bool ValidateSignature()
-        {
-            // TODO: Add RSA parameter(s) and implement
-            return true;
+            return BitConverter.GetBytes(IPAddress.HostToNetworkOrder(Id));
         }
 
         public override string ToString()

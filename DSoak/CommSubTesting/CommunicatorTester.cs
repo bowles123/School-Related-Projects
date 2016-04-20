@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.AccessControl;
 using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using CommSub;
-using Messages;
 using Messages.RequestMessages;
-using Messages.ReplyMessages;
 using SharedObjects;
 
 namespace CommSubTesting
@@ -33,6 +34,9 @@ namespace CommSubTesting
             comm2.Start();
             Assert.IsTrue(comm2.Port >= comm2.MinPort && comm2.Port <= comm2.MaxPort);
             Assert.AreNotEqual(comm1.Port, comm2.Port);
+
+            comm1.Stop();
+            comm2.Stop();
         }
 
         [TestMethod]
@@ -55,13 +59,40 @@ namespace CommSubTesting
                 comm2.Start();
                 Assert.Fail("Expected excepted not throw");
             }
-            catch (ApplicationException) { }
+            catch (ApplicationException)
+            {
+            }
             catch (Exception)
             {
                 Assert.Fail("Unexpected exception");
             }
 
+            comm1.Stop();
+            comm2.Stop();
+
         }
+
+        [TestMethod]
+        public void Communicator_TestLotsOfCommunicators()
+        {
+            List<Communicator> comms = new List<Communicator>();
+            for (int i = 0; i < 100; i++)
+            {
+                Communicator comm = new Communicator() {MinPort = 12000, MaxPort = 12999};
+                comms.Add(comm);
+            }
+
+            Parallel.ForEach(comms, (comm) => { comm.Start(); });
+
+            Thread.Sleep(1000);
+
+            foreach (Communicator comm in comms)
+            {
+                Assert.IsTrue(comm.Port >= comm.MinPort && comm.Port <= comm.MaxPort);
+                comm.Stop();
+            }
+        }
+
 
         [TestMethod]
         public void Communicator_TestBadConstruction()

@@ -66,6 +66,20 @@ namespace CommSub
                 return result;
             }
         }
+
+        public Error this[int index]
+        {
+            get
+            {
+                Error result = null;
+                lock (_myLock)
+                {
+                    if (index < _errors.Count)
+                        result = _errors[index];
+                }
+                return result;
+            }
+        }
     }
 
 }

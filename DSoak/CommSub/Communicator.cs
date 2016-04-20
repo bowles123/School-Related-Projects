@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 
 using Messages;
@@ -16,6 +18,7 @@ namespace CommSub
         private static readonly ILog LoggerDeep = LogManager.GetLogger(typeof(Communicator) + "_Deep");
 
         private UdpClient _myUdpClient;
+        private static readonly object StartLock = new object();
         #endregion
 
         #region Public Properties
@@ -28,32 +31,34 @@ namespace CommSub
         #region Public Methods
         public void Start()
         {
-            Logger.Debug("Start communicator");
+            Logger.Info("Start communicator");
             bool bindSuccessfull = false;
 
             ValidPorts();
 
-            int portToTry = MinPort;
-            while (!bindSuccessfull && portToTry <= MaxPort)
+            lock (StartLock)
             {
-                try
+                int portToTry = FindAvailablePort(MinPort, MaxPort);
+                if (portToTry > 0)
                 {
-                    IPEndPoint localEp = new IPEndPoint(IPAddress.Any, portToTry);
-                    _myUdpClient = new UdpClient(localEp);
-                    bindSuccessfull = true;
+                    try
+                    {
+                        IPEndPoint localEp = new IPEndPoint(IPAddress.Any, portToTry);
+                        _myUdpClient = new UdpClient(localEp);
+                        bindSuccessfull = true;
+                    }
+                    catch (SocketException)
+                    {
+                    }
                 }
-                catch (SocketException)
-                {
-                    portToTry++;
-                }
+                if (!bindSuccessfull)
+                    throw new ApplicationException(string.Format("Cannot bind the socket to a port {0}", portToTry));
             }
-            if (!bindSuccessfull)
-                throw new ApplicationException("Cannot bind the socket to a port");
         }
 
         public void Stop()
         {
-            Logger.Debug("Stop of communicator");
+            Logger.Info("Stop of communicator");
             if (_myUdpClient != null)
             {
                 _myUdpClient.Close();
@@ -111,7 +116,7 @@ namespace CommSub
                 {
                     _myUdpClient.Send(bytesToSend, bytesToSend.Length, outgoingEnvelope.EndPoint.IPEndPoint);
                     result = true;
-                    Logger.Debug("Send complete");
+                    LoggerDeep.Debug("Send complete");
                 }
                 catch (Exception err)
                 {
@@ -137,7 +142,7 @@ namespace CommSub
                 {
                     LoggerDeep.Debug("Try receive bytes from anywhere");
                     receivedBytes = _myUdpClient.Receive(ref ep);
-                    Logger.Debug("Back from receive");
+                    LoggerDeep.Debug("Back from receive");
 
                     if (Logger.IsDebugEnabled)
                     {
@@ -166,6 +171,30 @@ namespace CommSub
             if ((MinPort != 0 && (MinPort < IPEndPoint.MinPort || MinPort > IPEndPoint.MaxPort)) ||
                 (MaxPort != 0 && (MaxPort < IPEndPoint.MinPort || MaxPort > IPEndPoint.MaxPort)))
                 throw new ApplicationException("Invalid port specifications");
+        }
+
+        private int FindAvailablePort(int minPort, int maxPort)
+        {
+            int availablePort = -1;
+
+            Logger.DebugFormat("Find a free port between {0} and {1}", minPort, maxPort);
+            for (int possiblePort = minPort; possiblePort <= maxPort; possiblePort++)
+            {
+                if (!IsUsed(possiblePort))
+                {
+                    availablePort = possiblePort;
+                    break;
+                }
+            }
+            Logger.DebugFormat("Available Port = {0}", availablePort);
+            return availablePort;
+        }
+
+        private bool IsUsed(int port)
+        {
+            IPGlobalProperties properties = IPGlobalProperties.GetIPGlobalProperties();
+            IPEndPoint[] endPoints = properties.GetActiveUdpListeners();
+            return endPoints.Any(ep => ep.Port == port);
         }
         #endregion
 
