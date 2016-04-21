@@ -14,8 +14,8 @@ namespace CommSub
     public class Communicator
     {
         #region Private Data Members
-        private static readonly ILog Logger = LogManager.GetLogger(typeof(Communicator));
-        private static readonly ILog LoggerDeep = LogManager.GetLogger(typeof(Communicator) + "_Deep");
+        private readonly ILog _logger;
+        private readonly ILog _loggerDeep;
 
         private UdpClient _myUdpClient;
         private static readonly object StartLock = new object();
@@ -28,10 +28,19 @@ namespace CommSub
 
         #endregion
 
+        public Communicator(string loggerPrefix = null)
+        {
+            loggerPrefix = string.IsNullOrWhiteSpace(loggerPrefix) ? "" : loggerPrefix.Trim() + "_";
+
+             _logger = LogManager.GetLogger(loggerPrefix + typeof(Communicator));
+             _loggerDeep = LogManager.GetLogger(loggerPrefix + typeof(Communicator) + "_Deep");   
+        }
+
+
         #region Public Methods
         public void Start()
         {
-            Logger.Info("Start communicator");
+            _logger.Info("Start communicator");
             bool bindSuccessfull = false;
 
             ValidPorts();
@@ -58,7 +67,7 @@ namespace CommSub
 
         public void Stop()
         {
-            Logger.Info("Stop of communicator");
+            _logger.Info("Stop of communicator");
             if (_myUdpClient != null)
             {
                 _myUdpClient.Close();
@@ -84,7 +93,7 @@ namespace CommSub
                 if (message != null)
                 {
                     result = new Envelope(message, pep);
-                    Logger.DebugFormat("Just received message, Nr={0}, Conv={1}, Type={2}, From={3}",
+                    _logger.DebugFormat("Just received message, Nr={0}, Conv={1}, Type={2}, From={3}",
                         (result.Message.MsgId==null) ? "null" : result.Message.MsgId.ToString(),
                         (result.Message.ConvId==null) ? "null" : result.Message.ConvId.ToString(),
                         result.Message.GetType().Name,
@@ -92,9 +101,9 @@ namespace CommSub
                 }
                 else
                 {
-                    Logger.ErrorFormat("Cannot decode message received from {0}", pep);
+                    _logger.ErrorFormat("Cannot decode message received from {0}", pep);
                     string tmp = Encoding.ASCII.GetString(receivedBytes);
-                    Logger.ErrorFormat("Message={0}", tmp);
+                    _logger.ErrorFormat("Message={0}", tmp);
                 }
             }
         
@@ -105,22 +114,22 @@ namespace CommSub
         {
             bool result = false;
             if (outgoingEnvelope == null || !outgoingEnvelope.IsValidToSend)
-                Logger.Warn("Invalid Envelope or Message");
+                _logger.Warn("Invalid Envelope or Message");
             else
             {
                 byte[] bytesToSend =outgoingEnvelope.Message.Encode();
 
-                Logger.DebugFormat("Send out: {0} to {1}", Encoding.ASCII.GetString(bytesToSend), outgoingEnvelope.EndPoint);
+                _logger.DebugFormat("Send out: {0} to {1}", Encoding.ASCII.GetString(bytesToSend), outgoingEnvelope.EndPoint);
 
                 try
                 {
                     _myUdpClient.Send(bytesToSend, bytesToSend.Length, outgoingEnvelope.EndPoint.IPEndPoint);
                     result = true;
-                    LoggerDeep.Debug("Send complete");
+                    _loggerDeep.Debug("Send complete");
                 }
                 catch (Exception err)
                 {
-                    Logger.Warn(err.ToString());
+                    _logger.Warn(err.ToString());
                 }
             }
             return result;
@@ -140,27 +149,27 @@ namespace CommSub
                 ep = new IPEndPoint(IPAddress.Any, 0);
                 try
                 {
-                    LoggerDeep.Debug("Try receive bytes from anywhere");
+                    _loggerDeep.Debug("Try receive bytes from anywhere");
                     receivedBytes = _myUdpClient.Receive(ref ep);
-                    LoggerDeep.Debug("Back from receive");
+                    _loggerDeep.Debug("Back from receive");
 
-                    if (Logger.IsDebugEnabled)
+                    if (_logger.IsDebugEnabled)
                     {
                         if (receivedBytes != null)
                         {
                             string tmp = Encoding.ASCII.GetString(receivedBytes);
-                            Logger.DebugFormat("Incoming message={0}", tmp);
+                            _logger.DebugFormat("Incoming message={0}", tmp);
                         }
                     }
                 }
                 catch (SocketException err)
                 {
                     if (err.SocketErrorCode != SocketError.TimedOut && err.SocketErrorCode != SocketError.Interrupted)
-                        Logger.Warn(err.Message);
+                        _logger.Warn(err.Message);
                 }
                 catch (Exception err)
                 {
-                    Logger.Warn(err.Message);
+                    _logger.Warn(err.Message);
                 }
             }
             return receivedBytes;
@@ -177,7 +186,7 @@ namespace CommSub
         {
             int availablePort = -1;
 
-            Logger.DebugFormat("Find a free port between {0} and {1}", minPort, maxPort);
+            _logger.DebugFormat("Find a free port between {0} and {1}", minPort, maxPort);
             for (int possiblePort = minPort; possiblePort <= maxPort; possiblePort++)
             {
                 if (!IsUsed(possiblePort))
@@ -186,7 +195,7 @@ namespace CommSub
                     break;
                 }
             }
-            Logger.DebugFormat("Available Port = {0}", availablePort);
+            _logger.DebugFormat("Available Port = {0}", availablePort);
             return availablePort;
         }
 

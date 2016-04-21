@@ -42,10 +42,10 @@ namespace CommSub
         #endregion
 
         #region Constructors, Initializers, Destructors
-        public virtual void SetupCommSubsystem(ConversationFactory conversationFactory, int minPort=12000, int maxPort=12999)
+        public virtual void SetupCommSubsystem(ConversationFactory conversationFactory, int minPort=12000, int maxPort=12999, string communicatorLoggerPrefix = null)
         {
             CommSubsystem = new CommSubsystem() { ConversationFactory = conversationFactory, MaxPort = maxPort, MinPort = minPort };
-            CommSubsystem.Initialize(this);
+            CommSubsystem.Initialize(this, communicatorLoggerPrefix);
             CommSubsystem.Start();
         }
 

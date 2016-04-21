@@ -27,6 +27,32 @@ namespace CommSub
             }
         }
 
+        public void ChangeLifePoints(int processId, int deltaChange)
+        {
+            lock (_myLock)
+            {
+                Logger.DebugFormat("Change life points for Process {0} by {1}", processId, deltaChange);
+                if (_processes.ContainsKey(processId) && deltaChange!=0)
+                {
+                    _isDirty = true;
+                    _processes[processId].ChangeLifePoints(deltaChange);
+                }
+            }
+        }
+
+        public void SetHasUmbrellaRaised(int processId, bool isRaised, int umbrellaId = 0)
+        {
+            lock (_myLock)
+            {
+                Logger.DebugFormat("Set HasRaiseUmbrella for Process {0} to {1}", processId, isRaised);
+                if (_processes.ContainsKey(processId))
+                {
+                    _isDirty = _processes[processId].HasUmbrellaRaised != isRaised;
+                    _processes[processId].ChangeUmbrellaStatus(isRaised, umbrellaId);
+                }
+            }
+        }
+
         public void UpdateProcesses(GameProcessData[] currentProcesses)
         {
             lock (_myLock)
@@ -53,7 +79,7 @@ namespace CommSub
             {
                 int id = processInfo.ProcessId;
 
-                Logger.DebugFormat("Add/Update ({0}, {1}) to ProcessAddressBook", id, processInfo.Type);
+                Logger.DebugFormat("Add/Update {0}", processInfo.ToString());
                 lock (_myLock)
                 {
                     if (!_processes.ContainsKey(id))
@@ -120,6 +146,19 @@ namespace CommSub
             return result;
         }
 
+        public List<GameProcessData> ProcessesWithExpiredUmbrellas(DateTime cutoffDateTime)
+        {
+            List<GameProcessData> result;
+            lock (_myLock)
+            {
+                result = _processes.Where(kp => kp.Value.UmbrellaRaisedDateTime!=null &&
+                                                kp.Value.UmbrellaRaisedDateTime.Value <= cutoffDateTime)
+                    .Select(kp => kp.Value)
+                    .ToList();
+            }
+            return result;
+        }
+
         public List<GameProcessData> Processes
         {
             get
@@ -138,9 +177,11 @@ namespace CommSub
             if (key != null)
             {
                 // Import the public key into a Cryptography Service Provider
-                RSAParameters rsaKeyInfo = new RSAParameters();
-                rsaKeyInfo.Modulus = key.Modulus;
-                rsaKeyInfo.Exponent = key.Exponent;
+                RSAParameters rsaKeyInfo = new RSAParameters
+                {
+                    Modulus = key.Modulus,
+                    Exponent = key.Exponent
+                };
 
                 RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
                 rsa.ImportParameters(rsaKeyInfo);

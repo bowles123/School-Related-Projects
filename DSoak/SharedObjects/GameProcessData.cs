@@ -101,6 +101,10 @@ namespace SharedObjects
             }
         }
 
+        public int UmbrellaId { get; set; }
+        
+        public DateTime? UmbrellaRaisedDateTime { get; set; }
+
         public DateTime LastChanged
         {
             get
@@ -116,13 +120,32 @@ namespace SharedObjects
             }
         }
 
+        public void ChangeUmbrellaStatus(bool isRaised, int umbrellaId)
+        {
+            if (_myLock == null) _myLock = new object();
+            lock (_myLock)
+            {
+                if (isRaised != _hasUmbrellaRaised)
+                {
+                    _hasUmbrellaRaised = isRaised;
+                    UmbrellaId = umbrellaId;
+                    UmbrellaRaisedDateTime = (isRaised) ? DateTime.Now : (DateTime?)null;
+
+                    _lastChanged = DateTime.Now;
+                }
+            }                        
+        }
+
         public void ChangeLifePoints(int delta)
         {
             if (_myLock == null) _myLock = new object();
             lock (_myLock)
             {
-                _lifePoints = Math.Max(0, _lifePoints + delta);
-                _lastChanged = DateTime.Now;
+                if (delta != 0)
+                {
+                    _lifePoints = Math.Max(0, _lifePoints + delta);
+                    _lastChanged = DateTime.Now;
+                }
             }            
         }
 

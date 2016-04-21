@@ -28,13 +28,13 @@ namespace CommSub
         /// This methods setup up all of the components in a CommSubsystem.  Call this method
         /// sometime after setting the MinPort, MaxPort, and ConversationFactory
         /// </summary>
-        public void Initialize(CommProcess process)
+        public void Initialize(CommProcess process, string communicationLoggerPrefix = null)
         {
             _parentProcess = process;
             _queueDictionary = new EnvelopeQueueDictionary();
             
             ConversationFactory.Initialize();
-            _myCommunicator = new Communicator() { MinPort = MinPort, MaxPort = MaxPort };
+            _myCommunicator = new Communicator(communicationLoggerPrefix) { MinPort = MinPort, MaxPort = MaxPort };
             _myDispatcher = new Dispatcher() { Label = "Dispatcher", CommSubsystem = this};
         }
         
