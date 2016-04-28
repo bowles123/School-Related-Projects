@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using log4net;
+
 namespace SharedObjects
 {
     public class ResourceSet<T> where T : SharedResource
     {
+        private readonly ILog _logger;
+
         private readonly Dictionary<int, T> _resources = new Dictionary<int, T>(); 
         private readonly List<int> _available = new List<int>();
         private readonly List<int> _reserved = new List<int>();
@@ -12,8 +16,14 @@ namespace SharedObjects
         private readonly object _myLock = new object();
         private int _lastRecentlyUsedIndex;
 
+        public ResourceSet()
+        {
+            _logger = LogManager.GetLogger(GetType().Name);
+        }
+
         public void Clear()
         {
+            _logger.Debug("Clear resource set");
             lock (_myLock)
             {
                 _resources.Clear();
@@ -53,6 +63,7 @@ namespace SharedObjects
         {
             if (sharedResource != null)
             {
+                _logger.DebugFormat("AddOrUpdate {0} to ResourceSet", sharedResource.GetType().Name);
                 lock (_myLock)
                 {
                     if (_resources.ContainsKey(sharedResource.Id))
@@ -100,8 +111,8 @@ namespace SharedObjects
                     _reserved.Add(result.Id);
                 }
             }
+            _logger.DebugFormat("Return from ReserveOne with {0}", (result==null) ? "null": result.Id.ToString());
             return result;
-            
         }
 
         public T[] ReserveMany(int n)
@@ -120,14 +131,17 @@ namespace SharedObjects
                     }
                 }
             }
-            return result;
+            _logger.DebugFormat("Return from ReserveMany with {0}", (result==null) ? "null" :
+                         Utils.HelperFunctions.IntArrayToString(result.Select(p => p.Id).ToArray()));
 
+            return result;
         }
 
         public void Unreserve(int[] ids)
         {
             if (ids != null && ids.Length > 0)
             {
+                _logger.DebugFormat("Unreserve {0}", Utils.HelperFunctions.IntArrayToString(ids));
                 lock (_myLock)
                 {
                     foreach (int id in ids)
@@ -140,6 +154,7 @@ namespace SharedObjects
         {
             lock (_myLock)
             {
+                _logger.DebugFormat("Unreserve {0}", id);
                 if (_reserved.Contains(id))
                 {
                     _reserved.Remove(id);
@@ -152,6 +167,7 @@ namespace SharedObjects
         {
             if (ids != null && ids.Length > 0)
             {
+                _logger.DebugFormat("MarkAsUsed {0}", Utils.HelperFunctions.IntArrayToString(ids));
                 lock (_myLock)
                 {
                     foreach (int id in ids)
@@ -164,6 +180,8 @@ namespace SharedObjects
         {
             lock (_myLock)
             {
+                _logger.DebugFormat("MarkAsUsed {0}", id);
+
                 if (_reserved.Contains(id))
                     _reserved.Remove(id);
                 else if (_available.Contains(id))
@@ -182,6 +200,8 @@ namespace SharedObjects
                 result = true;
                 if (pennies != null && pennies.Length > 0)
                 {
+                    _logger.DebugFormat("Are {0} available?", Utils.HelperFunctions.IntArrayToString(pennies.Select(p => p.Id).ToArray()));
+
                     if (!pennies.All(p => _available.Contains(p.Id)))
                         result = false;
 
@@ -189,6 +209,7 @@ namespace SharedObjects
                         MarkAsUsed(pennies.Select(p => p.Id).ToArray());
                 }
             }
+            _logger.DebugFormat("Return from AreAllAvailable with {0}", result);
             return result;
         }
 
@@ -197,9 +218,13 @@ namespace SharedObjects
             bool result = false;
             lock (_myLock)
             {
+                _logger.DebugFormat("Are {0} used?", Utils.HelperFunctions.IntArrayToString(pennies.Select(p => p.Id).ToArray()));
+
                 if (pennies != null && pennies.Length>0 && pennies.Any(p => _used.Contains(p.Id)))
                     result = true;
             }
+            _logger.DebugFormat("Return from AreAnyUsed with {0}", result);
+
             return result;
         }
 

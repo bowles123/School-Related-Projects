@@ -46,7 +46,6 @@ Y:\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\obj\Debug\CommSubTesting.p
 \\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\bin\Debug\Messages.pdb
 \\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\bin\Debug\SharedObjects.pdb
 \\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\bin\Debug\Utils.pdb
-Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\obj\Debug\CommSubTesting.csprojResolveAssemblyReference.cache
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\bin\Debug\CommSubTesting.dll.config
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\bin\Debug\CommSubTesting.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\bin\Debug\CommSubTesting.pdb
@@ -60,5 +59,6 @@ Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\bin\Debug\CommSub.
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\bin\Debug\Messages.pdb
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\bin\Debug\SharedObjects.pdb
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\bin\Debug\Utils.pdb
+Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\obj\Debug\CommSubTesting.csprojResolveAssemblyReference.cache
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\obj\Debug\CommSubTesting.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\CommSubTesting\obj\Debug\CommSubTesting.pdb

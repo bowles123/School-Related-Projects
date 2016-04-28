@@ -30,3 +30,7 @@ Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\Messages\bin\Debug\SharedObjects.
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\Messages\obj\Debug\Messages.csprojResolveAssemblyReference.cache
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\Messages\obj\Debug\Messages.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\Messages\obj\Debug\Messages.pdb
+Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\Messages\bin\Debug\Utils.dll
+Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\Messages\bin\Debug\Utils.pdb
+\\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\Messages\bin\Debug\Utils.dll
+\\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\Messages\bin\Debug\Utils.pdb

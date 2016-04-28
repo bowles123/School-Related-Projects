@@ -38,3 +38,7 @@ Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\bin\Debug\SharedOb
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\obj\Debug\MessageTesting.csprojResolveAssemblyReference.cache
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\obj\Debug\MessageTesting.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\obj\Debug\MessageTesting.pdb
+Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\bin\Debug\Utils.dll
+Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\bin\Debug\Utils.pdb
+\\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\bin\Debug\Utils.dll
+\\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\MessageTesting\bin\Debug\Utils.pdb

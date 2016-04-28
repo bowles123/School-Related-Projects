@@ -23,12 +23,16 @@ Y:\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\obj\Debug\SharedObje
 \\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\obj\Debug\SharedObjectsTesting.dll
 \\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\obj\Debug\SharedObjectsTesting.pdb
 \\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\log4net.dll
-Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\obj\Debug\SharedObjectsTesting.csprojResolveAssemblyReference.cache
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\MessageNumberTests.orderedtest
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\SharedObjectsTesting.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\SharedObjectsTesting.pdb
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\SharedObjects.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\log4net.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\SharedObjects.pdb
+Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\obj\Debug\SharedObjectsTesting.csprojResolveAssemblyReference.cache
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\obj\Debug\SharedObjectsTesting.dll
 Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\obj\Debug\SharedObjectsTesting.pdb
+Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\Utils.dll
+Y:\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\Utils.pdb
+\\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\Utils.dll
+\\psf\Dropbox\UnderGit\cs5200s16-instructor\DSoak\SharedObjectsTesting\bin\Debug\Utils.pdb
