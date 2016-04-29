@@ -192,6 +192,9 @@ namespace Utils
                     filePath = guesses[guessIndex];
                 guessIndex++;
             }
+            if (string.IsNullOrWhiteSpace(filePath) && guesses.Length > 0)
+                filePath = guesses[0];
+
             return filePath;
         }
 
