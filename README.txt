@@ -1,4 +1,4 @@
-This repository contains examples and shared code for CS5200, Spring 2016 semester.
-Each example or series of examples is captured in a subdirectory of the ./Examples
-directory.  Shared code and executables for the course project are in the DSoak
-directory.
+This repository contains shared code and executables for the course project that are in the DSoak
+directory and a folder with my personal code for the class project. The game contains processes that 
+communicate back and forth to determine the status of each process involved in the game.
+The processes include a game manager, a registry, a player, a balloon store, a water server, and an umbrella supplier.
