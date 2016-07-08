@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{212221DF-C58C-412A-945F-363521D1A33F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CommunicationSubsystem</RootNamespace>
+    <AssemblyName>CommunicationSubsystem</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CommandLine, Version=1.9.71.2, Culture=neutral, PublicKeyToken=de6f01bd326f8c32, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommandLineParser.1.9.71\lib\net45\CommandLine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\cs5200s16-shared\DSoak\3rdParty\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommSubsystem.cs" />
+    <Compile Include="CommunicationProcess.cs" />
+    <Compile Include="Conversations\Initiators\AuctionAnnouncementInitiator.cs" />
+    <Compile Include="Conversations\Initiators\GetPublicKeyInitiator.cs" />
+    <Compile Include="Conversations\Initiators\NextIdInitiator.cs" />
+    <Compile Include="Conversations\Initiators\PennyValidationInitiator.cs" />
+    <Compile Include="Conversations\Initiators\RaiseUmbrellaInitiator.cs" />
+    <Compile Include="Conversations\Responders\AliveResponder.cs" />
+    <Compile Include="Conversations\Responders\AllowanceDistributionResponder.cs" />
+    <Compile Include="Conversations\Initiators\BuyBalloonInitiator.cs" />
+    <Compile Include="Communicator.cs" />
+    <Compile Include="Conversation.cs" />
+    <Compile Include="ConversationFactory.cs" />
+    <Compile Include="Conversations\Responders\AuctionResponder.cs" />
+    <Compile Include="Conversations\Responders\BidResponder.cs" />
+    <Compile Include="Conversations\Responders\BuyBalloonResponder.cs" />
+    <Compile Include="Conversations\Responders\ExitGameResponder.cs" />
+    <Compile Include="Conversations\Responders\FillBalloonResponder.cs" />
+    <Compile Include="Conversations\Responders\UmbrellaLoweredResponder.cs" />
+    <Compile Include="Dispatcher.cs" />
+    <Compile Include="Envelope.cs" />
+    <Compile Include="EnvelopeQueue.cs" />
+    <Compile Include="ConversationDictionary.cs" />
+    <Compile Include="Error.cs" />
+    <Compile Include="Conversations\Initiators\FillBalloonInitiator.cs" />
+    <Compile Include="Conversations\Responders\GameStatusResponder.cs" />
+    <Compile Include="Conversations\Initiators\GetGameListInitiator.cs" />
+    <Compile Include="Conversations\Responders\HitResponder.cs" />
+    <Compile Include="Conversations\Initiators\JoinGameInitiator.cs" />
+    <Compile Include="Conversations\Initiators\LeaveGameInitiator.cs" />
+    <Compile Include="Conversations\Initiators\LoginInitiator.cs" />
+    <Compile Include="Conversations\Initiators\LogoutInitiator.cs" />
+    <Compile Include="NetworkStreamExtensions.cs" />
+    <Compile Include="Conversations\OneWayConversation.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Conversations\Responders\ReadyResponder.cs" />
+    <Compile Include="Conversations\RequestReplyConversation.cs" />
+    <Compile Include="Conversations\RequestReplyProxy.cs" />
+    <Compile Include="Conversations\Responders\ShutdownResponder.cs" />
+    <Compile Include="RuntimeOptions.cs" />
+    <Compile Include="StateChange.cs" />
+    <Compile Include="Conversations\Initiators\ThrowBalloonInitiator.cs" />
+    <Compile Include="Conversations\TimeoutRetryConversation.cs" />
+    <Compile Include="Conversations\UnreliableMulticast.cs" />
+    <Compile Include="Conversations\UnreliableMultiCastProxy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\cs5200s16-shared\DSoak\Messages\Messages.csproj">
+      <Project>{9659277f-710a-4e0b-ac2b-12882aac247d}</Project>
+      <Name>Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cs5200s16-shared\DSoak\SharedObjects\SharedObjects.csproj">
+      <Project>{67fea8d0-4871-49d4-aa38-217f63934d26}</Project>
+      <Name>SharedObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\cs5200s16-shared\DSoak\Utils\Utils.csproj">
+      <Project>{3239fcca-21eb-4b04-b8ad-c442491e463e}</Project>
+      <Name>Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

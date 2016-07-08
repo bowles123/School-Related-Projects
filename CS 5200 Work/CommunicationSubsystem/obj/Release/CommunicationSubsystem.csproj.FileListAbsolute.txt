@@ -1,0 +1,12 @@
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\bin\Release\CommunicationSubsystem.dll
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\bin\Release\CommunicationSubsystem.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\bin\Release\Messages.dll
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\bin\Release\SharedObjects.dll
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\bin\Release\Utils.dll
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\bin\Release\log4net.dll
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\bin\Release\Messages.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\bin\Release\SharedObjects.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\bin\Release\Utils.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\obj\Release\CommunicationSubsystem.csprojResolveAssemblyReference.cache
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\obj\Release\CommunicationSubsystem.dll
+C:\Users\Brian\Desktop\CS 5200 Work\CommunicationSubsystem\obj\Release\CommunicationSubsystem.pdb

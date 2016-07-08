@@ -1,0 +1,17 @@
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\Test.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\Messages.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\Player.exe
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\SharedObjects.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\log4net.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\Messages.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\SharedObjects.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\Player.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+C:\Users\Brian\Desktop\CS 5200 Work\Test\obj\Debug\Test.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Test\obj\Debug\Test.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\Test.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\CommunicationSubsystem.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\Utils.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\Utils.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Test\bin\Debug\CommunicationSubsystem.pdb

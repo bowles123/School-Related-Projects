@@ -1,0 +1,17 @@
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\Player.exe.config
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\Player.exe
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\Player.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\log4net.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\Messages.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\SharedObjects.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\Messages.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\SharedObjects.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Player\obj\Debug\Player.csprojResolveAssemblyReference.cache
+C:\Users\Brian\Desktop\CS 5200 Work\Player\obj\Debug\Player.exe
+C:\Users\Brian\Desktop\CS 5200 Work\Player\obj\Debug\Player.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\CommunicationSubsystem.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\Utils.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\Utils.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\CommunicationSubsystem.pdb
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\CommandLine.dll
+C:\Users\Brian\Desktop\CS 5200 Work\Player\bin\Debug\CommandLine.xml
